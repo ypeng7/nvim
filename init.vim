@@ -75,7 +75,7 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gn <Plug>(coc-rename)
@@ -128,6 +128,8 @@ filetype plugin indent on     " required!
 noremap <leader>[ :bp<return>
 noremap <leader>] :bn<return>
 
+
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " NerdTree
 let g:NERDTreeDirArrowExpandable = '▸'
