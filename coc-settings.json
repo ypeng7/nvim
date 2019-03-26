@@ -1,0 +1,45 @@
+{
+    "suggest.triggerAfterInsertEnter": true,
+    "suggest.timeout": 500,
+    "suggest.noselect": false,
+    "suggest.minTriggerInputLength": 2,
+    "suggest.acceptSuggestionOnCommitCharacter": true,
+	"suggest.preferCompleteThanJumpPlaceholder": true,
+    "suggest.detailField":"abbr",
+    "suggest.snippetIndicator": "🌟",
+    "suggest.triggerCompletionWait": 50,
+	"diagnostic.errorSign": "😡",
+	"diagnostic.warningSign": "🤔",
+    "languageserver": {
+    "golang": {
+      "command": "go-langserver",
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls"
+         }
+       }
+    }
+  }
+}
