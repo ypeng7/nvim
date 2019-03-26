@@ -19,15 +19,10 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'Shougo/echodoc.vim'
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
+Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
 
 " Git operators：tpope 的经典插件，不解释
 Plug 'tpope/vim-fugitive'
-" GitHub(fugitive :Gbrose support)
-Plug 'tpope/vim-rhubarb'
-" Git commit browser：实时预览 git commit修改
-Plug 'cohama/agit.vim'
-" Git diff：diff文本 超级方便方便了
-Plug 'mhinz/vim-signify'
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " 成对符号编辑：好多编辑器也支持了这个特性，因为太好用
@@ -37,9 +32,11 @@ Plug 'jiangmiao/auto-pairs'
 " 对齐：总是能治愈我的强迫症
 Plug 'junegunn/vim-easy-align'
 
+Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
-Plug 'machakann/vim-highlightedyank'
+" Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/lightline.vim'
+Plug 'w0rp/ale'
 " Initialize plugin system
 call plug#end()
 
@@ -76,6 +73,14 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gn <Plug>(coc-rename)
+
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -86,6 +91,8 @@ let g:lightline = {
       \   'cocstatus': 'coc#status'
       \ },
       \ }
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " ------------------- Self Configuration -----------------------
 " Use <Leader> in global plugin.
@@ -110,6 +117,23 @@ set ignorecase
 set infercase
 set smartcase
 
+set shortmess=aFc
+set completefunc=emoji#complete
+set completeopt =longest,menu
+set completeopt-=preview
+filetype plugin indent on     " required!
+
+
+" Switching Buffers
+noremap <leader>[ :bp<return>
+noremap <leader>] :bn<return>
+
+
+" NerdTree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+map <C-n> :NERDTreeToggle<CR>
+
 " Themes
 " Enable 256 color terminal
 set t_Co=256
@@ -130,3 +154,16 @@ hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
 
 "only for PaperColor and gruvbox Colorscheme if use another colorscheme you should comment this
 hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
+
+"for go
+au BufNewFile,BufRead *.go set filetype=go  noexpandtab tabstop=4 shiftwidth=4
+au BufNewFile,BufRead *.tmpl set filetype=html
+
+"for python
+au BufRead,BufNewFile *.py set shiftwidth=4 tabstop=4 softtabstop=4 expandtab smarttab autoindent
+
+" 打开文件自动定位到最后编辑的位置
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
+for f in split(glob('~/.config/nvim/rc/ftplugin/*.vim'), '\n')
+    exe 'source' f
+endfor
