@@ -73,7 +73,7 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-let g:coc_global_extensions =['coc-snippets','coc-json']
+let g:coc_global_extensions = ['coc-snippets', 'coc-json']
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
