@@ -73,6 +73,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
+let g:coc_global_extensions =['coc-snippets','coc-json']
+
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gt <Plug>(coc-type-definition)
@@ -169,3 +171,28 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "
 for f in split(glob('~/.config/nvim/rc/ftplugin/*.vim'), '\n')
     exe 'source' f
 endfor
+
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\   'python': ['autopep8'],
+\}
+
+let g:ale_linters = {
+              \ 'python': ['/usr/local/bin/flake8', ],
+              \ 'sh': ['language_server'],
+              \}
+let g:ale_enabled = 1
+let g:ale_sign_error = '✖︎'
+highlight ALEErrorSign guifg=red ctermfg=red
+let g:ale_sign_warning = '✔︎'
+highlight ALEWarningSign guifg=grey ctermfg=grey
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:move_key_modifier = 'N'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
