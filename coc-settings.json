@@ -3,6 +3,12 @@
     "python.venvPath": "~/Env",
     "python.linting.flake8Path": "/usr/local/bin/flake8",
     "python.linting.flake8Enabled": true,
+    "list.normalMappings": {
+      "t": "action:tabe",
+      "v": "action:vsplit",
+      "s": "action:split",
+      "d": "expr:GetDeleteAction"
+    },
     "suggest.triggerAfterInsertEnter": true,
     "suggest.timeout": 1000,
     "suggest.noselect": false,

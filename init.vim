@@ -1,4 +1,5 @@
 let $NVIM_COC_LOG_LEVEL = 'debug'
+let g:coc_force_debug = 1
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -18,7 +19,7 @@ Plug 'sheerun/vim-polyglot'
 " Markdown 实时预览插件，很好用
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-neco'
 
 Plug 'sebdah/vim-delve'
