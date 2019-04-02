@@ -3,6 +3,7 @@
     "python.venvPath": "~/Env",
     "python.linting.flake8Path": "/usr/local/bin/flake8",
     "python.linting.flake8Enabled": true,
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6",
     "list.normalMappings": {
       "t": "action:tabe",
       "v": "action:vsplit",
