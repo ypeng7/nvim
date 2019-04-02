@@ -99,7 +99,7 @@ let g:lightline = {
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-highlight', 'coc-word', 'coc-dictionary', 'coc-snippets', 'coc-yank']
+" g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-highlight', 'coc-word', 'coc-dictionary', 'coc-snippets', 'coc-yank']
 " ------------------- Self Configuration -----------------------
 " Use <Leader> in global plugin.
 let g:mapleader = "\<Space>"
