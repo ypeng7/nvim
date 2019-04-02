@@ -14,6 +14,7 @@
     "suggest.triggerCompletionWait": 50,
 	"diagnostic.errorSign": "😡",
 	"diagnostic.warningSign": "🤔",
+    "diagnostic.refreshOnInsertMode": true,
     "languageserver": {
     "golang": {
       "command": "gopls",
