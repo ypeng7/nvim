@@ -8,6 +8,8 @@ call plug#begin('~/.vim/plugged')
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'cinuor/vim-header'
 
 " Using a non-master branch
 " Language pack：一个包含了很多语言配置的包，有种 one thing to rule them all 的意思
@@ -16,10 +18,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'Shougo/echodoc.vim'
-Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
-Plug 'neoclide/coc-jedi', {'do': 'yarn install'}
+
+Plug 'sebdah/vim-delve'
 
 " Git operators：tpope 的经典插件，不解释
 Plug 'tpope/vim-fugitive'
@@ -31,6 +32,7 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 " 对齐：总是能治愈我的强迫症
 Plug 'junegunn/vim-easy-align'
+Plug 'terryma/vim-multiple-cursors'
 
 Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
@@ -136,7 +138,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " NerdTree
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-map <C-n> :NERDTreeToggle<CR>
+map <leader>f :NERDTreeToggle<CR>
 
 " Themes
 " Enable 256 color terminal
@@ -196,3 +198,16 @@ let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
+
+" nerdcommenter {
+    let g:NERDSpaceDelims = 1
+    " }
+
+" vim-header {
+let g:header_auto_add_header = 0
+let g:header_field_timestamp_format = '%Y-%m-%d'
+let g:header_field_author = 'Yue Peng'
+let g:header_field_author_email = 'yuepaang@gmail.com'
+"map <F7> :AddHeader<CR>
+map <leader>ah :AddHeader<CR>
+" }
