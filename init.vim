@@ -1,3 +1,4 @@
+let $NVIM_COC_LOG_LEVEL = 'debug'
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -98,6 +99,7 @@ let g:lightline = {
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-highlight', 'coc-word', 'coc-dictionary', 'coc-snippets', 'coc-yank']
 " ------------------- Self Configuration -----------------------
 " Use <Leader> in global plugin.
 let g:mapleader = "\<Space>"
