@@ -5,7 +5,8 @@ let g:coc_force_debug = 1
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-" Make sure you use single quotes
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/denite.nvim'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -36,7 +37,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'tpope/vim-commentary'
 Plug 'morhetz/gruvbox'
 " Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/lightline.vim'
@@ -48,6 +48,8 @@ call plug#end()
 inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
+let g:coc_status_error_sign = '•'
+let g:coc_status_warning_sign = '•'
 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
@@ -79,11 +81,11 @@ inoremap <silent><expr> <TAB>
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <Tab> and <S-Tab> for navigate completion list:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Use <cr> to confirm complete
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " To make <cr> select the first completion item and confirm completion when no item have selected:
 
@@ -116,6 +118,7 @@ let g:lightline = {
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-highlight', 'coc-word', 'coc-dictionary', 'coc-snippets', 'coc-yank']
+let g:coc_global_extensions =['coc-html', 'coc-css', 'coc-snippets', 'coc-prettier', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary']
 " ------------------- Self Configuration -----------------------
 " Use <Leader> in global plugin.
 let g:mapleader = "\<Space>"
@@ -175,6 +178,7 @@ highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
+
 hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
 
 "only for PaperColor and gruvbox Colorscheme if use another colorscheme you should comment this
@@ -203,11 +207,15 @@ let g:ale_fixers = {
 let g:ale_linters = {
               \ 'python': ['/usr/local/bin/flake8', ],
               \ 'sh': ['language_server'],
+              \ 'go': ['golint', 'go vet', 'go build'],
               \}
 let g:ale_enabled = 1
-let g:ale_sign_error = '✖︎'
+let g:ale_sign_column_always = 1
+let g:ale_set_highlights = 0
+"自定义error和warning图标
+let g:ale_sign_error = '😡'
+let g:ale_sign_warning = '😃'
 highlight ALEErrorSign guifg=red ctermfg=red
-let g:ale_sign_warning = '✔︎'
 highlight ALEWarningSign guifg=grey ctermfg=grey
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -215,8 +223,9 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:move_key_modifier = 'N'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
+"打开文件时不进行检查
+let g:ale_lint_on_enter = 0
 
 " nerdcommenter {
     let g:NERDSpaceDelims = 1
@@ -230,3 +239,12 @@ let g:header_field_author_email = 'yuepaang@gmail.com'
 "map <F7> :AddHeader<CR>
 map <leader>ah :AddHeader<CR>
 " }
+
+nnoremap <silent><localLeader>t  :Denite todo<CR>"
+nnoremap <silent><localLeader>d  :Denite todo:done<CR>"
+
+
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'

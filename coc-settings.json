@@ -3,6 +3,8 @@
     "python.venvPath": "~/Env",
     "python.linting.flake8Path": "/usr/local/bin/flake8",
     "python.linting.flake8Enabled": true,
+    "python.autoComplete.addBrackets": true,
+    "coc.preferences.formatOnType": true,
     // "python.pythonPath": "/usr/local/bin/python3",
     "list.normalMappings": {
       "t": "action:tabe",
