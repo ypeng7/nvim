@@ -159,7 +159,7 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " NerdTree
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-map <leader>f :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " Themes
 " Enable 256 color terminal
