@@ -41,6 +41,9 @@ Plug 'morhetz/gruvbox'
 " Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
+
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 " Initialize plugin system
 call plug#end()
 
@@ -155,6 +158,12 @@ noremap <leader>] :bn<return>
 
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
+
+nmap <leader>gy :Goyo<CR>
+nmap ngy :Goyo!<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " NerdTree
 let g:NERDTreeDirArrowExpandable = '▸'
