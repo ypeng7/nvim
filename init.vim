@@ -38,6 +38,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 
 Plug 'morhetz/gruvbox'
+Plug 'junegunn/seoul256.vim'
 " Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
@@ -108,7 +109,7 @@ nmap <silent> gn <Plug>(coc-rename)
 
 
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'seoul256',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
@@ -147,8 +148,8 @@ set smartcase
 
 set shortmess=aFc
 set completefunc=emoji#complete
-set completeopt =longest,menu
-set completeopt-=preview
+set completeopt=longest,menu
+set completeopt+=preview
 filetype plugin indent on     " required!
 
 
@@ -179,9 +180,10 @@ if has('termguicolors')
 endif
 
 set background=dark
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme seoul256
 
-highlight link CocErrorSign GruvboxRed
+" highlight link CocErrorSign GruvboxRed
 highlight Normal guibg=NONE ctermbg=None
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
@@ -191,7 +193,7 @@ hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
 
 "only for PaperColor and gruvbox Colorscheme if use another colorscheme you should comment this
-hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
+" hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
 
 "for go
 au BufNewFile,BufRead *.go set filetype=go  noexpandtab tabstop=4 shiftwidth=4
@@ -248,9 +250,6 @@ let g:header_field_author_email = 'yuepaang@gmail.com'
 "map <F7> :AddHeader<CR>
 map <leader>ah :AddHeader<CR>
 " }
-
-nnoremap <silent><localLeader>t  :Denite todo<CR>"
-nnoremap <silent><localLeader>d  :Denite todo:done<CR>"
 
 
 let g:multi_cursor_next_key='<C-n>'
