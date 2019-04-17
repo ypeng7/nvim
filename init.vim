@@ -16,6 +16,8 @@ Plug 'Shougo/denite.nvim'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'cinuor/vim-header'
@@ -45,12 +47,9 @@ Plug 'terryma/vim-multiple-cursors'
 
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
-" Plug 'machakann/vim-highlightedyank'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 
-" Plug 'junegunn/goyo.vim'
-" Plug 'junegunn/limelight.vim'
 " Initialize plugin system
 call plug#end()
 
@@ -106,7 +105,6 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
-let g:coc_global_extensions = ['coc-snippets', 'coc-json']
 
 " Use `[c` and `]c` for navigate diagnostics
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -151,7 +149,6 @@ let g:lightline = {
       \ }
 
 
-" g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-highlight', 'coc-word', 'coc-dictionary', 'coc-snippets', 'coc-yank']
 let g:coc_global_extensions =['coc-html', 'coc-css', 'coc-snippets', 'coc-prettier', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary']
 " ------------------- Self Configuration -----------------------
 " Use <Leader> in global plugin.
@@ -199,6 +196,25 @@ let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 map <leader>n :NERDTreeToggle<CR>
 
+let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
+
+" let g:nerdtree_tabs_open_on_console_startup = 1
+let g:nerdtree_tabs_focus_on_files = 1
+
+let g:NERDTreeIndicatorMapCustom = {
+\ "Modified"  : "✹",
+\ "Staged"    : "✚",
+\ "Untracked" : "✭",
+\ "Renamed"   : "➜",
+\ "Unmerged"  : "═",
+\ "Deleted"   : "✖",
+\ "Dirty"     : "✗",
+\ "Clean"     : "✔︎",
+\ 'Ignored'   : '☒',
+\ "Unknown"   : "?"
+\ }
+
 " Themes
 " Enable 256 color terminal
 set t_Co=256
@@ -223,12 +239,6 @@ hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
 "only for PaperColor and gruvbox Colorscheme if use another colorscheme you should comment this
 hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
 
-"for go
-au BufNewFile,BufRead *.go set filetype=go  noexpandtab tabstop=4 shiftwidth=4
-au BufNewFile,BufRead *.tmpl set filetype=html
-
-"for python
-au BufRead,BufNewFile *.py set shiftwidth=4 tabstop=4 softtabstop=4 expandtab smarttab autoindent
 
 " 打开文件自动定位到最后编辑的位置
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
