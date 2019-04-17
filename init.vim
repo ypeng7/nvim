@@ -201,6 +201,9 @@ let g:mapleader = "\<Space>"
 " Use <LocalLeader> in filetype plugin.
 let g:maplocalleader = ','
 
+
+set colorcolumn=80
+
 set tabstop=4
 set nobackup
 set noswapfile
