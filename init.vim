@@ -184,6 +184,8 @@ set noshowmode
 set noruler
 set noshowcmd
 
+set clipboard=unnamed,unnamedplus
+
 " Switching Buffers
 noremap <leader>[ :bp<return>
 noremap <leader>] :bn<return>
