@@ -288,8 +288,7 @@ if strftime('%H') >= 7 && strftime('%H') < 13
 else
   colorscheme monokai-night
   set background=dark
-  " let g:lightline = { 'colorscheme': 'cosmic_latte_dark' }
-  let g:lightline = { 'colorscheme': 'monokai-night' }
+  let g:lightline = { 'colorscheme': 'cosmic_latte_dark' }
 endif
 
 " colorscheme seoul256
