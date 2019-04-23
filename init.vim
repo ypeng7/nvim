@@ -1,347 +1,295 @@
-if &compatible
-  " `:set nocp` has many side effects. Therefore this should be done
-  " only when 'compatible' is set.
-  set nocompatible
-endif
+function! PackInit() abort
+    packadd minpac
+    call minpac#init()
+    call minpac#add('ncm2/ncm2')
+    call minpac#add('roxma/nvim-yarp')
 
-let $NVIM_COC_LOG_LEVEL = 'debug'
-let g:coc_force_debug = 1
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin()
+    call minpac#add('filipekiss/ncm2-look.vim')
+    call minpac#add('ncm2/ncm2-bufword')
+    call minpac#add('ncm2/ncm2-path')
+    call minpac#add('ncm2/ncm2-ultisnips')
+    call minpac#add('SirVer/ultisnips')
+    call minpac#add('honza/vim-snippets')
+    call minpac#add('ncm2/ncm2-vim')
+    call minpac#add('Shougo/neco-vim')
+    call minpac#add('Shougo/neco-syntax')
+    call minpac#add('ncm2/ncm2-syntax')
+    call minpac#add('Shougo/echodoc.vim')
+    call minpac#add('prabirshrestha/async.vim')
+    call minpac#add('prabirshrestha/vim-lsp')
+    call minpac#add('ncm2/ncm2-vim-lsp')
+    call minpac#add('leafgarland/typescript-vim')
+    call minpac#add('artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']})
+    call minpac#add('ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']})
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/denite.nvim'
-
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'scrooloose/nerdcommenter'
-Plug 'cinuor/vim-header'
-
-" Using a non-master branch
-" Language pack：一个包含了很多语言配置的包，有种 one thing to rule them all 的意思
-Plug 'sheerun/vim-polyglot'
-" Markdown 实时预览插件，很好用
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
-Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-neco'
-
-Plug 'sebdah/vim-delve'
-
-" Git operators：tpope 的经典插件，不解释
-Plug 'tpope/vim-fugitive'
-
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-" 成对符号编辑：好多编辑器也支持了这个特性，因为太好用
-Plug 'tpope/vim-surround'
-" 自动闭合括号，这个必须有
-Plug 'jiangmiao/auto-pairs'
-" 对齐：总是能治愈我的强迫症
-Plug 'junegunn/vim-easy-align'
-Plug 'terryma/vim-multiple-cursors'
-
-Plug 'morhetz/gruvbox'
-Plug 'junegunn/seoul256.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'w0rp/ale'
-
-" Initialize plugin system
-call plug#end()
-
-" Snippets
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
-let g:coc_status_error_sign = '•'
-let g:coc_status_warning_sign = '•'
-
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+    call minpac#add('cinuor/vim-header')
+    call minpac#add('jiangmiao/auto-pairs')
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
+    call minpac#add('scrooloose/nerdcommenter')
+    call minpac#add('scrooloose/nerdtree')
+    call minpac#add('jistr/vim-nerdtree-tabs')
+    call minpac#add('Xuyuanp/nerdtree-git-plugin')
 
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    call minpac#add('junegunn/vim-easy-align')
+    call minpac#add('iamcco/mathjax-support-for-mkdp')
+    call minpac#add('iamcco/markdown-preview.vim')
+    call minpac#add('junegunn/fzf')
+    call minpac#add('sebdah/vim-delve')
+    call minpac#add('heavenshell/vim-pydocstring')
+    call minpac#add('terryma/vim-multiple-cursors')
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
+    call minpac#add('nightsense/cosmic_latte')
+    call minpac#add('machakann/vim-highlightedyank')
+    call minpac#add('ntpeters/vim-better-whitespace')
 endfunction
 
-" use <c-space>for trigger completion
-inoremap <silent><expr> <c-space> coc#refresh()
+command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call PackInit() | call minpac#clean()
+command! PackStatus call PackInit() | call minpac#status()
 
-" Use <Tab> and <S-Tab> for navigate completion list:
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" neovim {
+    syntax enable
 
-" Use <cr> to confirm complete
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    set nobackup
+    set noswapfile
+    set nowritebackup
 
-" To make <cr> select the first completion item and confirm completion when no item have selected:
+    set tabstop=4
+    set signcolumn=no
+    set softtabstop=4
+    set expandtab
+    set shiftwidth=4
+    set smarttab
+    set colorcolumn=81
+    set foldenable
+    set foldmethod=syntax
+    set foldcolumn=0
+    setlocal foldlevel=1
+    set foldlevelstart=99
+    set termguicolors
 
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
-" Close preview window when completion is done.
-
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
-
-" Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gn <Plug>(coc-rename)
-
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
-endfunction
-
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-vmap gf  <Plug>(coc-format-selected)
-nmap gf  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocActionAsync('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-vmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Use `:Format` for format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` for fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+    set clipboard=unnamed,unnamedplus
+    let mapleader = "\<SPACE>"
+    let maplocalleader = ","
 
 
-let g:lightline = {
-      \ 'colorscheme': 'seoul256',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
+    if strftime('%H') >= 7 && strftime('%H') < 13
+      colorscheme cosmic_latte
+      set background=light
+    else
+      colorscheme monokai-soda
+      set background=dark
+    endif
 
 
-" let g:coc_global_extensions =['coc-html', 'coc-css', 'coc-snippets', 'coc-prettier', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary']
-" let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary']
-
-
-" ------------------- Self Configuration -----------------------
-" Use <Leader> in global plugin.
-let g:mapleader = "\<Space>"
-" Use <LocalLeader> in filetype plugin.
-let g:maplocalleader = ','
-
-
-set colorcolumn=80
-
-set tabstop=4
-set nobackup
-set noswapfile
-set signcolumn=yes
-set softtabstop=4
-set expandtab
-set shiftwidth=4
-set smarttab
-
-set hlsearch
-set incsearch
-set ignorecase
-set infercase
-set smartcase
-
-set shortmess=aFc
-set completefunc=emoji#complete
-set completeopt=longest,menu
-set completeopt+=preview
-filetype plugin indent on     " required!
-
-"Better display for messages
-set cmdheight=1
-set noshowmode
-set noruler
-set noshowcmd
-
-set clipboard=unnamed,unnamedplus
-set updatetime=300
-
-" Switching Buffers
-noremap <leader>[ :bp<return>
-noremap <leader>] :bn<return>
-
-
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-
-" NerdTree
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-map <leader>n :NERDTreeToggle<CR>
-
-let NERDTreeMinimalUI = 1
-let NERDTreeShowHidden = 1
-
-" let g:nerdtree_tabs_open_on_console_startup = 1
-let g:nerdtree_tabs_focus_on_files = 1
-
-let g:NERDTreeIndicatorMapCustom = {
-\ "Modified"  : "✹",
-\ "Staged"    : "✚",
-\ "Untracked" : "✭",
-\ "Renamed"   : "➜",
-\ "Unmerged"  : "═",
-\ "Deleted"   : "✖",
-\ "Dirty"     : "✗",
-\ "Clean"     : "✔︎",
-\ 'Ignored'   : '☒',
-\ "Unknown"   : "?"
-\ }
-
-" Themes
-" Enable 256 color terminal
-set t_Co=256
-" Enable true color
-if has('termguicolors')
-	set termguicolors
-endif
-
-set background=dark
-colorscheme gruvbox
-" colorscheme seoul256
-
-highlight link CocErrorSign GruvboxRed
-highlight Normal guibg=NONE ctermbg=None
-highlight WhitespaceEOL ctermbg=red guibg=red
-match WhitespaceEOL /\s\+$/
-
-hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
-
-hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
-
-"only for PaperColor and gruvbox Colorscheme if use another colorscheme you should comment this
-hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
-
-
-" 打开文件自动定位到最后编辑的位置
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
-for f in split(glob('~/.config/nvim/rc/ftplugin/*.vim'), '\n')
-    exe 'source' f
-endfor
-
-
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'python': ['autopep8'],
-\}
-
-let g:ale_linters = {
-              \ 'python': ['/usr/local/bin/flake8', ],
-              \ 'sh': ['language_server'],
-              \ 'go': ['golint', 'go vet', 'go build'],
-              \}
-let g:ale_enabled = 1
-let g:ale_sign_column_always = 1
-let g:ale_set_highlights = 0
-"自定义error和warning图标
-let g:ale_sign_error = '😡'
-let g:ale_sign_warning = '😃'
-highlight ALEErrorSign guifg=red ctermfg=red
-highlight ALEWarningSign guifg=grey ctermfg=grey
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-let g:move_key_modifier = 'N'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 1
-"打开文件时不进行检查
-let g:ale_lint_on_enter = 0
-
-" nerdcommenter {
-    let g:NERDSpaceDelims = 1
-    " }
-
-" vim-header {
-let g:header_auto_add_header = 0
-let g:header_field_timestamp_format = '%Y-%m-%d'
-let g:header_field_author = 'Yue Peng'
-let g:header_field_author_email = 'yuepaang@gmail.com'
-"map <F7> :AddHeader<CR>
-map <leader>ah :AddHeader<CR>
+    nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+    let g:python3_host_prog='/usr/local/bin/python3'
+    " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
+    " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
 
 
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
+" ncm2 {
+    " enable ncm2 for all buffers
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+
+    set completeopt=noinsert,menuone,noselect
+    set shortmess+=c
+    " Ctrl+C 退回到普通模式
+    inoremap <C-c> <ESC>
+    au TextChangedI * call ncm2#auto_trigger()
+
+    " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<CR>" : "\<CR>")
+
+    " " Use <TAB> to select the popup menu:
+    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" }
+
+
+" look {
+    let g:ncm2_look_enabled = 0
+
+    function! Ncm2_look_trigger()
+        if !exists("g:ncm2_look_enabled")
+            let g:ncm2_look_enabled = 0
+        endif
+        if g:ncm2_look_enabled==0
+            let g:ncm2_look_enabled = 1
+        else
+            let g:ncm2_look_enabled = 0
+        endif
+    endfunction
+
+    nnoremap <leader>lo :call Ncm2_look_trigger()<CR>
+" }
+
+"{
+    function! Close_signcolumn()
+        if &signcolumn == "no"
+            set signcolumn=yes
+        else
+            set signcolumn=no
+        endif
+    endfunction
+    nnoremap <silent> <leader>sc :call Close_signcolumn()<CR>
+"}
+
+" ncm2-ultisnips {
+    " inoremap <silent> <expr> <C-k> ncm2_ultisnips#expand_or("\<CR>", 'n')
+    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+
+    " imap <C-k> <Plug>(ultisnips_expand)
+    " let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
+    let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
+    let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
+    " let g:UltiSnipsRemoveSelectModeMappings = 0
+    " let g:snips_no_mappings = 1
+    " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
+" }
+
+" vim-lsp {
+
+    let g:lsp_signs_enabled = 0
+    let g:lsp_diagnostics_enabled = 1
+    let g:lsp_signs_error = {'text': 'x', 'icon': '~/.config/nvim/icon/error.svg'}
+    let g:lsp_signs_warning = {'text': '!', 'icon': '~/.config/nvim/icon/warning.svg'}
+    let g:lsp_signs_information = {'text': '@', 'icon': '~/.config/nvim/icon/info.svg'}
+    let g:lsp_signs_hint = {'text': '$'}
+
+    function! s:configure_lsp() abort
+        setlocal omnifunc=lsp#complete
+        nnoremap <buffer> gd :<C-u>LspDefinition<CR>
+        nnoremap <buffer> gh :<C-u>LspHover<CR>
+        nnoremap <buffer> gt :<C-u>LspTypeDefinition<CR>
+        nnoremap <buffer> gr :<C-u>LspReferences<CR>
+        nnoremap <buffer> grn :<C-u>LspRename<CR>
+
+        nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
+        nnoremap <buffer> gws :<C-u>LspWorkspaceSymbol<CR>
+
+        nnoremap <buffer> gf :<C-u>LspDocumentFormat<CR>
+        vnoremap <buffer> grf :LspDocumentRangeFormat<CR>
+        nnoremap <buffer> gi :<C-u>LspImplementation<CR>
+    endfunction
+
+    if executable('gopls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'gopls',
+            \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+            \ 'whitelist': ['go'],
+            \ })
+        " autocmd FileType go setlocal omnifunc=lsp#complete
+        autocmd FileType go call s:configure_lsp()
+    endif
+
+    if executable('pyls')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'pyls',
+            \ 'cmd': {server_info->['pyls']},
+            \ 'whitelist': ['python'],
+            \ })
+        autocmd FileType python call s:configure_lsp()
+    endif
+
+    if executable('typescript-language-server')
+        au User lsp_setup call lsp#register_server({
+            \ 'name': 'typescript-language-server',
+            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+            \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+            \ 'whitelist': ['typescript', 'typescript.tsx'],
+            \ })
+        autocmd FileType typescript call s:configure_lsp()
+    endif
+" }
+
+
+" echodoc {
+    set noshowmode
+    let g:echodoc#enable_at_startup = 1
+    let g:echodoc#type = 'signature'
+" }
+
+" vim-airline {
+    let g:airline_powerline_fonts = 1
+    let g:airline_left_sep        = '>'
+    let g:airline_right_sep       = '<'
+    let g:airline_theme           = 'luna'
+" }
+
+
+" nerdcommenter {
+    let g:NERDSpaceDelims = 1
+" }
+
+
+" vim-header {
+    let g:header_auto_add_header = 0
+    let g:header_field_timestamp_format = '%Y-%m-%d'
+    let g:header_field_author = 'Yue Peng'
+    let g:header_field_author_email = 'yuepaang@gmail.com'
+    map <F7> :AddHeader<CR>
+" }
+
+
+" NerdTree {
+        " nnoremap <silent> <F2> :NERDTree<CR>
+        " autocmd vimenter * NERDTree
+        let g:NERDTreeDirArrowExpandable = '▸'
+        let g:NERDTreeDirArrowCollapsible = '▾'
+        map <leader>n :NERDTreeToggle<CR>
+
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+        let NERDTreeMinimalUI = 1
+        let NERDTreeShowHidden = 1
+
+        " let g:nerdtree_tabs_open_on_console_startup = 1
+        let g:nerdtree_tabs_focus_on_files = 1
+
+        let g:NERDTreeIndicatorMapCustom = {
+          \ "Modified"  : "✹",
+          \ "Staged"    : "✚",
+          \ "Untracked" : "✭",
+          \ "Renamed"   : "➜",
+          \ "Unmerged"  : "═",
+          \ "Deleted"   : "✖",
+          \ "Dirty"     : "✗",
+          \ "Clean"     : "✔︎",
+          \ 'Ignored'   : '☒',
+          \ "Unknown"   : "?"
+          \ }
+
+" }
+
+
+" align {
+        xmap ga <Plug>(EasyAlign)
+        nmap ga <Plug>(EasyAlign)
+" }
+
+" windows {
+        map <C-j> <C-w>j
+        map <C-k> <C-w>k
+        map <C-l> <C-w>l
+        map <C-h> <C-w>h
+" }
+
+" markdown {
+        nmap <silent> <F5> <Plug>MarkdownPreview
+        imap <silent> <F5> <Plug>MarkdownPreview
+        nmap <silent> <F6> <Plug>StopMarkdownPreview
+        imap <silent> <F6> <Plug>StopMarkdownPreview
+" }
+
+" pydocstring {
+        nmap <silent> <C-d> <Plug>(pydocstring)
+" }
+
+" 打开文件自动定位到最后编辑的位置
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif
+
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
