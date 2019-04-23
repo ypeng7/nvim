@@ -48,9 +48,74 @@
       "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
       "initializationOptions": {
          "cache": {
-           "directory": "/tmp/ccls"
+           "directory": "/tmp/ccls",
+           "format": "json"
          }
        }
-    }
-    }
+    },
+    "MPLS": {
+            "command": "mspyls",
+            "trace.server": "verbose",
+            "filetypes": ["python"],
+            "initializationOptions": {
+                "interpreter": {
+                    "properties": {
+                        "InterpreterPath": "/usr/local/bin/python3",
+                        "UseDefaultDatabase": true
+                    }
+                },
+                "displayOptions": {
+                    "preferredFormat": "markdown",
+                    "trimDocumentationLines": false,
+                    "maxDocumentationLineLength": 0,
+                    "trimDocumentationText": false,
+                    "maxDocumentationTextLength": 0
+                },
+                "searchPaths": [
+                    "/usr/bin"
+                ],
+                "testEnvironment": false,
+                "analysisUpdates": true,
+                "traceLogging": true,
+                "asyncStartup": true
+            }
+        }
+    },
+    "suggest.enablePreview": true,
+    "suggest.maxPreviewWidth": 35,
+    "suggest.detailMaxLength": 100,
+    "diagnostic.level": "hint",
+    "diagnostic.refreshAfterSave": true,
+    "diagnostic.displayByAle": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.infoSign": "ℹ",
+    "diagnostic.hintSign": "➤",
+    "codeLens.enable": true,
+    "codeLens.separator": "‣",
+    "list.indicator": "➣",
+    "list.maxHeight": 15,
+    "list.insertMappings": {
+        "<C-p>": "action:preview"
+    },
+    "suggest.languageSourcePriority": 99,
+    "snippets.shortcut": "S",
+    "snippets.priority": 98,
+    "snippets.extends": {
+        "cpp": ["c"],
+        "javascriptreact": ["javascript"],
+        "typescript": ["javascript"]
+    },
+    "coc.source.file.shortcut": "F",
+    "coc.source.file.priority": 89,
+    "coc.source.file.ignoreHidden": false,
+    "coc.source.around.shortcut": "A",
+    "coc.source.around.priority": 88,
+    "coc.source.buffer.shortcut": "B",
+    "coc.source.buffer.priority": 87,
+    "coc.source.buffer.ignoreGitignore": false,
+    "coc.source.dictionary.shortcut": "D",
+    "coc.source.dictionary.priority": 9,
+    "coc.source.dictionary.filetypes": ["markdown", "text"],
+    "coc.preferences.colorSupport": true,
+    "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"]
 }

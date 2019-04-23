@@ -29,7 +29,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
+Plug 'Shougo/neoinclude.vim'
+Plug 'jsfaint/coc-neoinclude'
 
 Plug 'sebdah/vim-delve'
 
@@ -318,9 +321,11 @@ let g:ale_fixers = {
 \}
 
 let g:ale_linters = {
-              \ 'python': ['/usr/local/bin/flake8', ],
+              \ 'python': ['flake8', 'mypy', 'pydocstyle', 'pylint'],
               \ 'sh': ['language_server'],
               \ 'go': ['golint', 'go vet', 'go build'],
+              \ 'zsh': ['shell'],
+              \ 'vim': ['vint'],
               \}
 let g:ale_enabled = 1
 let g:ale_sign_column_always = 1
