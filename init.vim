@@ -49,6 +49,10 @@ Plug 'morhetz/gruvbox'
 Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
+Plug 'nikitavoloboev/vim-monokai-night'
+Plug 'nightsense/cosmic_latte'
+
+
 
 " Initialize plugin system
 call plug#end()
@@ -92,7 +96,7 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <Tab> and <S-Tab> for navigate completion list:
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Use <cr> to confirm complete
@@ -180,7 +184,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
@@ -274,8 +277,18 @@ if has('termguicolors')
 	set termguicolors
 endif
 
-set background=dark
-colorscheme gruvbox
+" Switch
+if strftime('%H') >= 7 && strftime('%H') < 13
+  colorscheme cosmic_latte
+  set background=light
+  let g:lightline = { 'colorscheme': 'cosmic_latte_light' }
+else
+  colorscheme monokai-night
+  set background=dark
+  " let g:lightline = { 'colorscheme': 'cosmic_latte_dark' }
+  let g:lightline = { 'colorscheme': 'monokai-night' }
+endif
+
 " colorscheme seoul256
 
 highlight link CocErrorSign GruvboxRed
