@@ -31,7 +31,6 @@ function! PackInit() abort
     call minpac#add('jistr/vim-nerdtree-tabs')
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
 
-
     call minpac#add('junegunn/vim-easy-align')
     call minpac#add('iamcco/mathjax-support-for-mkdp')
     call minpac#add('iamcco/markdown-preview.vim')
@@ -84,7 +83,7 @@ command! PackStatus call PackInit() | call minpac#status()
     endif
 
 
-    nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+    " nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
     let g:python3_host_prog='/usr/local/bin/python3'
     " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
@@ -153,8 +152,9 @@ command! PackStatus call PackInit() | call minpac#status()
 
 " vim-lsp {
 
-    let g:lsp_signs_enabled = 0
+    let g:lsp_signs_enabled = 1
     let g:lsp_diagnostics_enabled = 1
+    let g:lsp_diagnostics_echo_cursor = 1
     let g:lsp_signs_error = {'text': 'x', 'icon': '~/.config/nvim/icon/error.svg'}
     let g:lsp_signs_warning = {'text': '!', 'icon': '~/.config/nvim/icon/warning.svg'}
     let g:lsp_signs_information = {'text': '@', 'icon': '~/.config/nvim/icon/info.svg'}
