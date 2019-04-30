@@ -26,6 +26,7 @@ function! PackInit() abort
     call minpac#add('jiangmiao/auto-pairs')
     call minpac#add('vim-airline/vim-airline')
     call minpac#add('vim-airline/vim-airline-themes')
+    call minpac#add('Yggdroot/indentLine')
     call minpac#add('scrooloose/nerdcommenter')
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('jistr/vim-nerdtree-tabs')
@@ -37,8 +38,9 @@ function! PackInit() abort
     call minpac#add('junegunn/fzf')
     call minpac#add('sebdah/vim-delve')
     call minpac#add('heavenshell/vim-pydocstring')
-    call minpac#add('terryma/vim-multiple-cursors')
+    call minpac#add('mg979/vim-visual-multi')
 
+    call minpac#add('junegunn/seoul256.vim')
     call minpac#add('nightsense/cosmic_latte')
     call minpac#add('machakann/vim-highlightedyank')
     call minpac#add('ntpeters/vim-better-whitespace')
@@ -74,7 +76,7 @@ command! PackStatus call PackInit() | call minpac#status()
     let maplocalleader = ","
 
 
-    if strftime('%H') >= 7 && strftime('%H') < 13
+    if strftime('%H') >= 7 && strftime('%H') < 16
       colorscheme cosmic_latte
       set background=light
     else
@@ -204,6 +206,17 @@ command! PackStatus call PackInit() | call minpac#status()
             \ })
         autocmd FileType typescript call s:configure_lsp()
     endif
+
+    if executable('ccls')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'ccls',
+      \ 'cmd': {server_info->['ccls']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': {},
+      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+      \ })
+    endif
+
 " }
 
 
@@ -217,7 +230,7 @@ command! PackStatus call PackInit() | call minpac#status()
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep        = '>'
     let g:airline_right_sep       = '<'
-    let g:airline_theme           = 'luna'
+    let g:airline_theme           = 'seoul256'
 " }
 
 
@@ -293,3 +306,26 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "
 
 let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
+
+" VM
+let g:VM_maps = {}
+" let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+" let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+let g:VM_maps["Select l"]           = '<S-Right>'       " start selecting left
+let g:VM_maps["Select h"]           = '<S-Left>'        " start selecting right
+
+
+let g:VM_clear_buffer_hl = 0
+
+fun! VM_Start()
+  HighlightedyankOff
+endfun
+
+fun! VM_Exit()
+  HighlightedyankOn
+endfun
+
+" indentLine
+let g:indentLine_setColors = 0
+
+
