@@ -19,8 +19,8 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
     call minpac#add('leafgarland/typescript-vim')
-    call minpac#add('artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']})
-    call minpac#add('ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']})
+    " call minpac#add('artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']})
+    " call minpac#add('ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']})
 
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
@@ -230,7 +230,7 @@ command! PackStatus call PackInit() | call minpac#status()
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep        = '>'
     let g:airline_right_sep       = '<'
-    let g:airline_theme           = 'seoul256'
+    let g:airline_theme           = 'luna'
 " }
 
 
