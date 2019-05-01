@@ -179,15 +179,38 @@ command! PackStatus call PackInit() | call minpac#status()
         nnoremap <buffer> gi :<C-u>LspImplementation<CR>
     endfunction
 
-    if executable('gopls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'gopls',
-            \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-            \ 'whitelist': ['go'],
-            \ })
-        " autocmd FileType go setlocal omnifunc=lsp#complete
-        autocmd FileType go call s:configure_lsp()
+    " if executable('gopls')
+        " au User lsp_setup call lsp#register_server({
+            " \ 'name': 'gopls',
+            " \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+            " \ 'whitelist': ['go'],
+            " \ })
+        " " autocmd FileType go setlocal omnifunc=lsp#complete
+        " autocmd FileType go call s:configure_lsp()
+    " endif
+
+    if executable('go-langserver')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'go-langserver',
+        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
+        \ 'whitelist': ['go'],
+        \ })
+      autocmd FileType go call s:configure_lsp()
     endif
+
+    augroup LspGo
+      au!
+      autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'go-lang',
+          \ 'cmd': {server_info->['gopls']},
+          \ 'whitelist': ['go'],
+          \ })
+      " autocmd FileType go setlocal omnifunc=lsp#complete
+      autocmd FileType go call s:configure_lsp()
+      "autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
+      "autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
+      "autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
+    augroup END
 
     if executable('pyls')
         au User lsp_setup call lsp#register_server({
