@@ -8,6 +8,7 @@ function! PackInit() abort
     call minpac#add('ncm2/ncm2-bufword')
     call minpac#add('ncm2/ncm2-path')
     call minpac#add('ncm2/ncm2-ultisnips')
+    call minpac#add('ncm2/ncm2-go')
     call minpac#add('SirVer/ultisnips')
     call minpac#add('honza/vim-snippets')
     call minpac#add('ncm2/ncm2-vim')
