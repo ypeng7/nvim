@@ -25,12 +25,21 @@
 	"diagnostic.warningSign": "🤔",
     "diagnostic.refreshOnInsertMode": true,
     "languageserver": {
+    // "golang": {
+    //   "command": "gopls",
+    //   "args": [],
+    //   "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+    //   "filetypes": ["go"]
+    //   },
     "golang": {
-      "command": "gopls",
-      "args": [],
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
-      },
+      "command": "go-langserver",
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "gocodeCompletionEnabled": true,
+        "diagnosticsEnabled": true,
+        "lintTool": "golint"
+      }
+    },
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],

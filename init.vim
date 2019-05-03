@@ -4,8 +4,6 @@ if &compatible
   set nocompatible
 endif
 
-let $NVIM_COC_LOG_LEVEL = 'debug'
-let g:coc_force_debug = 1
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -26,13 +24,13 @@ Plug 'cinuor/vim-header'
 " Language pack：一个包含了很多语言配置的包，有种 one thing to rule them all 的意思
 Plug 'sheerun/vim-polyglot'
 " Markdown 实时预览插件，很好用
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'iamcco/mathjax-support-for-mkdp'
+
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
-Plug 'Shougo/neoinclude.vim'
-Plug 'jsfaint/coc-neoinclude'
 
 Plug 'sebdah/vim-delve'
 
@@ -54,11 +52,13 @@ Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 Plug 'nikitavoloboev/vim-monokai-night'
 Plug 'nightsense/cosmic_latte'
-
-
+Plug 'ayu-theme/ayu-vim'
 
 " Initialize plugin system
 call plug#end()
+
+let $NVIM_COC_LOG_LEVEL = 'debug'
+let g:coc_force_debug = 1
 
 " Snippets
 let g:coc_snippet_next = '<TAB>'
@@ -198,7 +198,7 @@ let g:lightline = {
 
 
 " let g:coc_global_extensions =['coc-html', 'coc-css', 'coc-snippets', 'coc-prettier', 'coc-eslint', 'coc-emmet', 'coc-tsserver', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary']
-" let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary']
+let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary']
 
 
 " ------------------- Self Configuration -----------------------
@@ -357,8 +357,16 @@ let g:header_field_author_email = 'yuepaang@gmail.com'
 map <leader>ah :AddHeader<CR>
 " }
 
-
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+" Markdown
+let g:mkdp_auto_start = 1
+let g:mkdp_auto_close = 1
+let g:mkdp_browser = ''
+" example
+nmap <F5> <Plug>MarkdownPreview
+nmap <F6> <Plug>MarkdownPreviewStop
+nmap <C-p> <Plug>MarkdownPreviewToggle
