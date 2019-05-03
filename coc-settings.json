@@ -1,5 +1,6 @@
 {
-    "python.jediEnabled": true,
+    "javascript.suggestionActions.enabled": false,
+    "python.jediEnabled": false,
     "python.venvPath": "~/Env",
     "python.linting.flake8Path": "/usr/local/bin/flake8",
     "python.linting.flake8Enabled": true,
@@ -13,7 +14,7 @@
       "d": "expr:GetDeleteAction"
     },
     "suggest.triggerAfterInsertEnter": true,
-    "suggest.timeout": 1000,
+    "suggest.timeout": 5000,
     "suggest.noselect": false,
     "suggest.minTriggerInputLength": 2,
     "suggest.acceptSuggestionOnCommitCharacter": true,
@@ -62,33 +63,34 @@
          }
        }
     },
-    "MPLS": {
-            "command": "mspyls",
-            "trace.server": "verbose",
-            "filetypes": ["python"],
-            "initializationOptions": {
-                "interpreter": {
-                    "properties": {
-                        "InterpreterPath": "/usr/local/bin/python3",
-                        "UseDefaultDatabase": true
-                    }
-                },
-                "displayOptions": {
-                    "preferredFormat": "markdown",
-                    "trimDocumentationLines": false,
-                    "maxDocumentationLineLength": 0,
-                    "trimDocumentationText": false,
-                    "maxDocumentationTextLength": 0
-                },
-                "searchPaths": [
-                    "/usr/bin"
-                ],
-                "testEnvironment": false,
-                "analysisUpdates": true,
-                "traceLogging": true,
-                "asyncStartup": true
-            }
-        }
+    //"MPLS": {
+    //        "command": "dotnet",
+	//		"args": ["exec", "~/common/python-language-server/output/bin/Release/Microsoft.Python.LanguageServer.dll"],
+    //        "trace.server": "verbose",
+    //        "filetypes": ["python"],
+    //        "initializationOptions": {
+    //            "interpreter": {
+    //                "properties": {
+    //                    "InterpreterPath": "/usr/local/bin/python3",
+    //                    "UseDefaultDatabase": true
+    //                }
+    //            },
+    //            "displayOptions": {
+    //                "preferredFormat": "markdown",
+    //                "trimDocumentationLines": false,
+    //                "maxDocumentationLineLength": 0,
+    //                "trimDocumentationText": false,
+    //                "maxDocumentationTextLength": 0
+    //            },
+    //            "searchPaths": [
+    //                "/usr/local/bin"
+    //            ],
+    //            "testEnvironment": false,
+    //            "analysisUpdates": true,
+    //            "traceLogging": true,
+    //            "asyncStartup": true
+    //        }
+    //    }
     },
     "suggest.enablePreview": true,
     "suggest.maxPreviewWidth": 35,
@@ -126,5 +128,7 @@
     "coc.source.dictionary.priority": 9,
     "coc.source.dictionary.filetypes": ["markdown", "text"],
     "coc.preferences.colorSupport": true,
+    //"coc.preferences.diagnostic.displayByAle": true,
+	//"highlight.disableLanguages": ["c", "cpp", "python", "go"],
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"]
 }
