@@ -53,6 +53,7 @@ Plug 'w0rp/ale'
 Plug 'nikitavoloboev/vim-monokai-night'
 Plug 'nightsense/cosmic_latte'
 Plug 'ayu-theme/ayu-vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Initialize plugin system
 call plug#end()
@@ -276,14 +277,12 @@ if has('termguicolors')
 endif
 
 " Switch
+colorscheme PaperColor
+  let g:lightline = { 'colorscheme': 'PaperColor' }
 if strftime('%H') >= 7 && strftime('%H') < 13
-  colorscheme cosmic_latte
   set background=light
-  let g:lightline = { 'colorscheme': 'cosmic_latte_light' }
 else
-  colorscheme monokai-night
   set background=dark
-  let g:lightline = { 'colorscheme': 'cosmic_latte_dark' }
 endif
 
 " colorscheme seoul256
