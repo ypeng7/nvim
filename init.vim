@@ -1,6 +1,4 @@
 if &compatible
-  " `:set nocp` has many side effects. Therefore this should be done
-  " only when 'compatible' is set.
   set nocompatible
 endif
 
@@ -55,7 +53,6 @@ Plug 'nightsense/cosmic_latte'
 Plug 'ayu-theme/ayu-vim'
 Plug 'NLKNguyen/papercolor-theme'
 
-" Initialize plugin system
 call plug#end()
 
 let $NVIM_COC_LOG_LEVEL = 'debug'
@@ -184,6 +181,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
+let g:lightline = { 'colorscheme': 'PaperColor' }
+
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -278,14 +277,12 @@ endif
 
 " Switch
 colorscheme PaperColor
-  let g:lightline = { 'colorscheme': 'PaperColor' }
-if strftime('%H') >= 7 && strftime('%H') < 13
+if strftime('%H') >= 7 && strftime('%H') < 16
   set background=light
 else
   set background=dark
 endif
 
-" colorscheme seoul256
 
 highlight link CocErrorSign GruvboxRed
 highlight Normal guibg=NONE ctermbg=None
@@ -297,7 +294,7 @@ hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
 
 "only for PaperColor and gruvbox Colorscheme if use another colorscheme you should comment this
-hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
+" hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
 
 
 " 打开文件自动定位到最后编辑的位置
