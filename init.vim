@@ -317,6 +317,7 @@ let g:ale_linters = {
               \ 'zsh': ['shell'],
               \ 'vim': ['vint'],
               \}
+
 let g:ale_enabled = 1
 let g:ale_sign_column_always = 1
 let g:ale_set_highlights = 0
@@ -357,7 +358,6 @@ let g:multi_cursor_quit_key='<Esc>'
 let g:mkdp_auto_start = 1
 let g:mkdp_auto_close = 1
 let g:mkdp_browser = ''
-" example
 nmap <F5> <Plug>MarkdownPreview
 nmap <F6> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle
