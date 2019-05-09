@@ -8,8 +8,8 @@ curl -sL install-node.now.sh | sh
 npm install -g typescript typescript-language-server
 
 # install go language server
-go get -u github.com/sourcegraph/go-langserver
-go get -u github.com/saibing/bingo
+# go get -u github.com/sourcegraph/go-langserver
+# go get -u github.com/saibing/bingo
 go get -u golang.org/x/tools/cmd/gopls
 mv $GOPATH/bin/gopls /usr/local/bin
 rm -rf $GOPATH/src/*

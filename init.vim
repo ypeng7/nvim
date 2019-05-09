@@ -20,8 +20,6 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
     call minpac#add('leafgarland/typescript-vim')
-    " call minpac#add('artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']})
-    " call minpac#add('ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']})
 
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
@@ -87,7 +85,7 @@ command! PackStatus call PackInit() | call minpac#status()
 
 
     " nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-    let g:python3_host_prog='/usr/local/bin/python3'
+    let g:python3_host_prog='/usr/bin/python3'
     " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
