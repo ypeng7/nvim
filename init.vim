@@ -50,25 +50,73 @@ command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
 " neovim {
+    set termguicolors
+    set t_Co=256
+
     syntax enable
-
-    set nobackup
-    set noswapfile
-    set nowritebackup
-
-    set tabstop=4
-    set signcolumn=no
-    set softtabstop=4
-    set expandtab
-    set shiftwidth=4
-    set smarttab
-    set colorcolumn=81
     set foldenable
     set foldmethod=syntax
     set foldcolumn=0
     setlocal foldlevel=1
     set foldlevelstart=99
-    set termguicolors
+
+    set autowrite
+    set autochdir
+    set nobackup
+    set noswapfile
+    set nowritebackup
+    set colorcolumn=80
+    set nocursorline
+    set encoding=utf-8
+    set fileencodings=utf-8,gbk,gb18030,gk2312,chinese,latin-1
+    set hidden
+    set history=1000
+    set linespace=0
+    set scrolljump=5
+    set scrolloff=3
+    set showmatch
+    set autoindent
+    set completeopt+=preview
+    set completeopt+=menuone
+    set completeopt+=longest
+    set completeopt+=noinsert
+    set completeopt+=noselect
+    set shortmess+=c
+    set previewheight=5
+    set noshowmode
+    set cmdheight=2
+    set noruler
+    set noshowcmd
+    set clipboard=unnamed,unnamedplus
+    set mouse=a
+    set mousehide
+
+    set hlsearch
+    set ignorecase
+    set incsearch
+    set smartcase
+    set showmatch
+
+    set expandtab
+    set shiftwidth=0
+    set softtabstop=4
+    set tabstop=4
+    set smarttab
+
+    set wrap
+    set wrapmargin=2
+    set linebreak
+    set breakindent
+    set noshiftround
+    set number
+    set relativenumber
+    set laststatus=2
+    " set spell spelllang=en_us
+    set autoread
+
+" Highlight end of line whitespace.
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
 
     set clipboard=unnamed,unnamedplus
     let mapleader = "\<SPACE>"
@@ -85,7 +133,12 @@ command! PackStatus call PackInit() | call minpac#status()
 
 
     " nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-    let g:python3_host_prog='/usr/bin/python3'
+    if has('unix')
+        let g:python3_host_prog='/usr/bin/python3'
+    else
+        let g:python3_host_prog='/usr/local/bin/python3'
+    endif
+
     " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
@@ -205,9 +258,6 @@ command! PackStatus call PackInit() | call minpac#status()
           \ })
       " autocmd FileType go setlocal omnifunc=lsp#complete
       autocmd FileType go call s:configure_lsp()
-      "autocmd FileType go nmap <buffer> gd <plug>(lsp-definition)
-      "autocmd FileType go nmap <buffer> ,n <plug>(lsp-next-error)
-      "autocmd FileType go nmap <buffer> ,p <plug>(lsp-previous-error)
     augroup END
 
     if executable('pyls')
