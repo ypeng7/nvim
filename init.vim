@@ -276,8 +276,9 @@ if has('termguicolors')
 endif
 
 " Switch
-colorscheme PaperColor
-if strftime('%H') >= 7 && strftime('%H') < 16
+" colorscheme PaperColor
+colorscheme monokai-night
+if strftime('%H') >= 7 && strftime('%H') < 13
   set background=light
 else
   set background=dark
