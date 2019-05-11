@@ -114,9 +114,9 @@ command! PackStatus call PackInit() | call minpac#status()
     " set spell spelllang=en_us
     set autoread
 
-" Highlight end of line whitespace.
-highlight WhitespaceEOL ctermbg=red guibg=red
-match WhitespaceEOL /\s\+$/
+    " Highlight end of line whitespace.
+    highlight WhitespaceEOL ctermbg=red guibg=red
+    match WhitespaceEOL /\s\+$/
 
     set clipboard=unnamed,unnamedplus
     let mapleader = "\<SPACE>"
@@ -291,7 +291,6 @@ match WhitespaceEOL /\s\+$/
 
 " }
 
-
 " echodoc {
     set noshowmode
     let g:echodoc#enable_at_startup = 1
@@ -302,14 +301,16 @@ match WhitespaceEOL /\s\+$/
     let g:airline_powerline_fonts = 1
     let g:airline_left_sep        = '>'
     let g:airline_right_sep       = '<'
-    let g:airline_theme           = 'luna'
+    if strftime('%H') >= 7 && strftime('%H') < 16
+        let g:airline_theme           = 'cosmic_latte_light'
+    else
+        let g:airline_theme           = 'cosmic_latte_dark'
+    endif
 " }
-
 
 " nerdcommenter {
     let g:NERDSpaceDelims = 1
 " }
-
 
 " vim-header {
     let g:header_auto_add_header = 0
@@ -370,7 +371,7 @@ match WhitespaceEOL /\s\+$/
 " }
 
 " pydocstring {
-        nmap <silent> <C-d> <Plug>(pydocstring)
+        nmap <silent> <leader>pd <Plug>(pydocstring)
 " }
 
 " 打开文件自动定位到最后编辑的位置
@@ -381,8 +382,8 @@ let g:strip_whitespace_on_save = 1
 
 " VM
 let g:VM_maps = {}
-" let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
-" let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
 let g:VM_maps["Select l"]           = '<S-Right>'       " start selecting left
 let g:VM_maps["Select h"]           = '<S-Left>'        " start selecting right
 
@@ -413,4 +414,4 @@ function! HandleURL()
   endif
 endfunction
 
-nnoremap <leader>w :call HandleURL()<CR>¬
+nnoremap <leader>ou :call HandleURL()<CR>¬
