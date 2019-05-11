@@ -50,10 +50,19 @@ command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
 " neovim {
+
+    " autocmd! BufWritePost $MYVIMRC source %
+
     set termguicolors
     set t_Co=256
+    set nocompatible
 
     syntax enable
+    set magic
+    filetype on
+    filetype indent on
+    filetype plugin on
+
     set foldenable
     set foldmethod=syntax
     set foldcolumn=0
@@ -74,8 +83,8 @@ command! PackStatus call PackInit() | call minpac#status()
     set linespace=0
     set scrolljump=5
     set scrolloff=3
-    set showmatch
     set autoindent
+    set smartindent
     set completeopt+=preview
     set completeopt+=menuone
     set completeopt+=longest
@@ -98,7 +107,7 @@ command! PackStatus call PackInit() | call minpac#status()
     set showmatch
 
     set expandtab
-    set shiftwidth=0
+    set shiftwidth=4
     set softtabstop=4
     set tabstop=4
     set smarttab
