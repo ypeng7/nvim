@@ -9,6 +9,8 @@ function! PackInit() abort
     call minpac#add('ncm2/ncm2-path')
     call minpac#add('ncm2/ncm2-ultisnips')
     call minpac#add('ncm2/ncm2-go')
+    call minpac#add('ncm2/ncm2-html-subscope')
+    call minpac#add('ncm2/ncm2-cssomni')
     call minpac#add('SirVer/ultisnips')
     call minpac#add('honza/vim-snippets')
     call minpac#add('ncm2/ncm2-vim')
@@ -20,6 +22,7 @@ function! PackInit() abort
     call minpac#add('prabirshrestha/vim-lsp')
     call minpac#add('ncm2/ncm2-vim-lsp')
     call minpac#add('leafgarland/typescript-vim')
+    call minpac#add('mattn/emmet-vim')
 
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
@@ -424,3 +427,4 @@ function! HandleURL()
 endfunction
 
 nnoremap <leader>ou :call HandleURL()<CR>¬
+
