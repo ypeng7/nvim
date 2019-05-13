@@ -65,10 +65,10 @@ let g:coc_status_error_sign = '•'
 let g:coc_status_warning_sign = '•'
 
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+" imap <C-l> <Plug>(coc-snippets-expand)
 
 " Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+" vmap <C-j> <Plug>(coc-snippets-select)
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
@@ -97,11 +97,11 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <Tab> and <S-Tab> for navigate completion list:
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Use <cr> to confirm complete
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 
 " To make <cr> select the first completion item and confirm completion when no item have selected:
@@ -193,7 +193,7 @@ let g:lightline = {
       \ },
       \ }
 
-let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary', 'coc-tsserver']
+let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git']
 
 
 " ------------------- Self Configuration -----------------------
