@@ -1,28 +1,19 @@
 function! PackInit() abort
     packadd minpac
     call minpac#init()
-    call minpac#add('ncm2/ncm2')
-    call minpac#add('roxma/nvim-yarp')
-
-    call minpac#add('filipekiss/ncm2-look.vim')
-    call minpac#add('ncm2/ncm2-bufword')
-    call minpac#add('ncm2/ncm2-path')
-    call minpac#add('ncm2/ncm2-ultisnips')
-    call minpac#add('ncm2/ncm2-go')
-    call minpac#add('ncm2/ncm2-html-subscope')
-    call minpac#add('ncm2/ncm2-cssomni')
+    call minpac#add('Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'})
+    call minpac#add('deoplete-plugins/deoplete-go', {'do': 'make'})
     call minpac#add('SirVer/ultisnips')
     call minpac#add('honza/vim-snippets')
-    call minpac#add('ncm2/ncm2-vim')
     call minpac#add('Shougo/neco-vim')
     call minpac#add('Shougo/neco-syntax')
-    call minpac#add('ncm2/ncm2-syntax')
     call minpac#add('Shougo/echodoc.vim')
-    call minpac#add('prabirshrestha/async.vim')
-    call minpac#add('prabirshrestha/vim-lsp')
-    call minpac#add('ncm2/ncm2-vim-lsp')
-    call minpac#add('leafgarland/typescript-vim')
+
     call minpac#add('mattn/emmet-vim')
+    call minpac#add('autozimu/LanguageClient-neovim', {
+                \ 'branch': 'next',
+                \ 'do': 'sh install.sh',
+                \})
 
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
@@ -102,6 +93,7 @@ command! PackStatus call PackInit() | call minpac#status()
     set clipboard=unnamed,unnamedplus
     set mouse=a
     set mousehide
+    set signcolumn=yes
 
     set hlsearch
     set ignorecase
@@ -155,151 +147,49 @@ command! PackStatus call PackInit() | call minpac#status()
     " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
 
+" deoplete {
+    let g:deoplete#enable_at_startup = 1
+    function SetLSPShortcuts()
+      nnoremap <leader>gd :call LanguageClient#textDocument_definition()<CR>
+      nnoremap <leader>gr :call LanguageClient#textDocument_rename()<CR>
+      nnoremap <leader>gf :call LanguageClient#textDocument_formatting()<CR>
+      nnoremap <leader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
+      nnoremap <leader>gx :call LanguageClient#textDocument_references()<CR>
+      nnoremap <leader>ga :call LanguageClient_workspace_applyEdit()<CR>
+      nnoremap <leader>gc :call LanguageClient#textDocument_completion()<CR>
+      nnoremap <leader>gh :call LanguageClient#textDocument_hover()<CR>
+      nnoremap <leader>gs :call LanguageClient_textDocument_documentSymbol()<CR>
+      nnoremap <leader>gm :call LanguageClient_contextMenu()<CR>
+    endfunction()
 
-" ncm2 {
-    " enable ncm2 for all buffers
-    autocmd BufEnter * call ncm2#enable_for_buffer()
-
-    set completeopt=noinsert,menuone,noselect
-    set shortmess+=c
-    " Ctrl+C 退回到普通模式
-    inoremap <C-c> <ESC>
-    au TextChangedI * call ncm2#auto_trigger()
-
-    " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<CR>" : "\<CR>")
-
-    " " Use <TAB> to select the popup menu:
-    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-    " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" }
-
-
-" look {
-    let g:ncm2_look_enabled = 0
-
-    function! Ncm2_look_trigger()
-        if !exists("g:ncm2_look_enabled")
-            let g:ncm2_look_enabled = 0
-        endif
-        if g:ncm2_look_enabled==0
-            let g:ncm2_look_enabled = 1
-        else
-            let g:ncm2_look_enabled = 0
-        endif
-    endfunction
-
-    nnoremap <leader>lo :call Ncm2_look_trigger()<CR>
-" }
-
-"{
-    function! Close_signcolumn()
-        if &signcolumn == "no"
-            set signcolumn=yes
-        else
-            set signcolumn=no
-        endif
-    endfunction
-    nnoremap <silent> <leader>sc :call Close_signcolumn()<CR>
-"}
-
-" ncm2-ultisnips {
-    " inoremap <silent> <expr> <C-k> ncm2_ultisnips#expand_or("\<CR>", 'n')
-    inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
-    " imap <C-k> <Plug>(ultisnips_expand)
-    " let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
-    let g:UltiSnipsJumpForwardTrigger       = "<C-j>"
-    let g:UltiSnipsJumpBackwardTrigger      = "<C-k>"
-    " let g:UltiSnipsRemoveSelectModeMappings = 0
-    " let g:snips_no_mappings = 1
-    " let g:UltiSnipsSnippetDirectories = ['~/.config/nvim/UltiSnips', 'UltiSnips']
-" }
-
-" vim-lsp {
-
-    let g:lsp_signs_enabled = 1
-    let g:lsp_diagnostics_enabled = 1
-    let g:lsp_diagnostics_echo_cursor = 1
-    let g:lsp_signs_error = {'text': 'x', 'icon': '~/.config/nvim/icon/error.svg'}
-    let g:lsp_signs_warning = {'text': '!', 'icon': '~/.config/nvim/icon/warning.svg'}
-    let g:lsp_signs_information = {'text': '@', 'icon': '~/.config/nvim/icon/info.svg'}
-    let g:lsp_signs_hint = {'text': '$'}
-
-    function! s:configure_lsp() abort
-        setlocal omnifunc=lsp#complete
-        nnoremap <buffer> gd :<C-u>LspDefinition<CR>
-        nnoremap <buffer> gh :<C-u>LspHover<CR>
-        nnoremap <buffer> gt :<C-u>LspTypeDefinition<CR>
-        nnoremap <buffer> gr :<C-u>LspReferences<CR>
-        nnoremap <buffer> grn :<C-u>LspRename<CR>
-
-        nnoremap <buffer> gs :<C-u>LspDocumentSymbol<CR>
-        nnoremap <buffer> gws :<C-u>LspWorkspaceSymbol<CR>
-
-        nnoremap <buffer> gf :<C-u>LspDocumentFormat<CR>
-        vnoremap <buffer> grf :LspDocumentRangeFormat<CR>
-        nnoremap <buffer> gi :<C-u>LspImplementation<CR>
-    endfunction
-
-    " if executable('gopls')
-        " au User lsp_setup call lsp#register_server({
-            " \ 'name': 'gopls',
-            " \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-            " \ 'whitelist': ['go'],
-            " \ })
-        " " autocmd FileType go setlocal omnifunc=lsp#complete
-        " autocmd FileType go call s:configure_lsp()
-    " endif
-
-    if executable('go-langserver')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'go-langserver',
-        \ 'cmd': {server_info->['go-langserver', '-gocodecompletion']},
-        \ 'whitelist': ['go'],
-        \ })
-      autocmd FileType go call s:configure_lsp()
-    endif
-
-    augroup LspGo
-      au!
-      autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'go-lang',
-          \ 'cmd': {server_info->['gopls']},
-          \ 'whitelist': ['go'],
-          \ })
-      " autocmd FileType go setlocal omnifunc=lsp#complete
-      autocmd FileType go call s:configure_lsp()
+    augroup LSP
+      autocmd!
+      autocmd FileType cpp,c,python,go call SetLSPShortcuts()
     augroup END
 
-    if executable('pyls')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'pyls',
-            \ 'cmd': {server_info->['pyls']},
-            \ 'whitelist': ['python'],
-            \ })
-        autocmd FileType python call s:configure_lsp()
-    endif
+    let g:deoplete#sources#go#gocode_binary = "$GOPATH/bin/gocode"
 
-    if executable('typescript-language-server')
-        au User lsp_setup call lsp#register_server({
-            \ 'name': 'typescript-language-server',
-            \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-            \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-            \ 'whitelist': ['typescript', 'typescript.tsx'],
-            \ })
-        autocmd FileType typescript call s:configure_lsp()
-    endif
+" }
 
-    if executable('ccls')
-   au User lsp_setup call lsp#register_server({
-      \ 'name': 'ccls',
-      \ 'cmd': {server_info->['ccls']},
-      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
-      \ 'initialization_options': {},
-      \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
-      \ })
-    endif
+
+" LanguageClient-neovim {
+
+    " Required for operations modifying multiple buffers like rename.
+    set hidden
+
+    let g:LanguageClient_serverCommands = {
+        \ 'python': ['pyls'],
+        \ 'go': ['gopls'],
+        \ 'c': ['ccls'],
+        \ 'cpp': ['ccls'],
+        \ 'objc': ['ccls'],
+        \ }
+
+    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+    " Or map each action separately
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
 " }
 
