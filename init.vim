@@ -44,14 +44,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'morhetz/gruvbox'
-Plug 'junegunn/seoul256.vim'
+" Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
-Plug 'nikitavoloboev/vim-monokai-night'
-Plug 'nightsense/cosmic_latte'
-Plug 'ayu-theme/ayu-vim'
-Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
@@ -65,10 +61,10 @@ let g:coc_status_error_sign = '•'
 let g:coc_status_warning_sign = '•'
 
 " Use <C-l> for trigger snippet expand.
-" imap <C-l> <Plug>(coc-snippets-expand)
+imap <C-l> <Plug>(coc-snippets-expand)
 
 " Use <C-j> for select text for visual placeholder of snippet.
-" vmap <C-j> <Plug>(coc-snippets-select)
+vmap <C-j> <Plug>(coc-snippets-select)
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
@@ -181,15 +177,21 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
-let g:lightline = { 'colorscheme': 'PaperColor' }
+" Integrate Coc with Lightline
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline = { 'colorscheme': 'gruvbox' }
 
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status'
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
       \ },
       \ }
 
@@ -276,12 +278,13 @@ if has('termguicolors')
 endif
 
 " Switch
-" colorscheme PaperColor
-colorscheme monokai-night
-if strftime('%H') >= 7 && strftime('%H') < 13
-  set background=light
+colorscheme ayu
+if strftime('%H') >= 7 && strftime('%H') < 16
+  " set background=light
+  let ayucolor="light"
 else
-  set background=dark
+  " set background=dark
+  let ayucolor="dark"
 endif
 
 
@@ -308,6 +311,7 @@ endfor
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
+\   'json': ['prettier'],
 \   'python': ['autopep8'],
 \}
 
