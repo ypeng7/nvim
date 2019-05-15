@@ -1,12 +1,25 @@
+" MinPac Plugin Manager
+
 function! PackInit() abort
     packadd minpac
     call minpac#init()
     call minpac#add('Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'})
     call minpac#add('deoplete-plugins/deoplete-go', {'do': 'make'})
+    call minpac#add('deoplete-plugins/deoplete-jedi')
+
+    call minpac#add('davidhalter/jedi-vim')
+    call minpac#add('hynek/vim-python-pep8-indent')
+
+    call minpac#add('ekalinin/Dockerfile.vim')
+    call minpac#add('uarun/vim-protobuf')
+
     call minpac#add('SirVer/ultisnips')
     call minpac#add('honza/vim-snippets')
+    call minpac#add('Shougo/neosnippet-snippets')
+    call minpac#add('Shougo/neosnippet.vim', {'depends': ['neosnippet-snippets']})
     call minpac#add('Shougo/neco-vim')
     call minpac#add('Shougo/neco-syntax')
+    call minpac#add('Shougo/neopairs.vim')
     call minpac#add('Shougo/echodoc.vim')
 
     call minpac#add('mattn/emmet-vim')
@@ -18,13 +31,21 @@ function! PackInit() abort
     call minpac#add('sheerun/vim-polyglot')
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
-    call minpac#add('vim-airline/vim-airline')
-    call minpac#add('vim-airline/vim-airline-themes')
+    " call minpac#add('vim-airline/vim-airline')
+    " call minpac#add('vim-airline/vim-airline-themes')
+    call minpac#add('itchyny/lightline.vim')
+    call minpac#add('maximbaz/lightline-ale')
+    call minpac#add('mgee/lightline-bufferline')
+    call minpac#add('ryanoasis/vim-devicons')
+
     call minpac#add('Yggdroot/indentLine')
     call minpac#add('scrooloose/nerdcommenter')
     call minpac#add('scrooloose/nerdtree')
     call minpac#add('jistr/vim-nerdtree-tabs')
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
+
+    call minpac#add('airblade/vim-gitgutter')
+    call minpac#add('lambdalisue/gina.vim')
 
     call minpac#add('junegunn/vim-easy-align')
     call minpac#add('iamcco/mathjax-support-for-mkdp')
@@ -44,7 +65,15 @@ command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
 
-" neovim {
+" GlobalAutoCmd:
+
+augroup GlobalAutoCmd
+  autocmd!
+augroup END
+command! -nargs=* Gautocmd   autocmd GlobalAutoCmd <args>
+command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
+
+" neovim global settings{
 
     " autocmd! BufWritePost $MYVIMRC source %
 
@@ -53,10 +82,10 @@ command! PackStatus call PackInit() | call minpac#status()
     set nocompatible
 
     syntax enable
-    set magic
     filetype on
     filetype indent on
     filetype plugin on
+    set magic
 
     set foldenable
     set foldmethod=syntax
@@ -211,15 +240,86 @@ command! PackStatus call PackInit() | call minpac#status()
     let g:echodoc#type = 'signature'
 " }
 
-" vim-airline {
-    let g:airline_powerline_fonts = 1
-    let g:airline_left_sep        = '>'
-    let g:airline_right_sep       = '<'
+" lightline {
+    " https://donniewest.com/a-guide-to-basic-neovim-plugins
+    let g:lightline = {}
     if strftime('%H') >= 7 && strftime('%H') < 16
-        let g:airline_theme           = 'cosmic_latte_light'
+        let g:lightline.colorscheme = 'cosmic_latte_light'
     else
-        let g:airline_theme           = 'cosmic_latte_dark'
+        let g:lightline.colorscheme = 'cosmic_latte_dark'
     endif
+
+
+    function! LightlineModified()
+      hi ModifiedColor ctermfg=167 guifg=#cf6a4c ctermbg=242 guibg=#666656 term=bold cterm=bold
+      return &modified ? '+' : &modifiable ? '' : '-'
+    endfunction
+
+    let g:lightline.component = {
+          \ 'absolutepath': '%F',
+          \ 'bufnum': '%n',
+          \ 'charvalue': '%b',
+          \ 'charvaluehex': '%B',
+          \ 'close': '%999X X ',
+          \ 'column': '%c',
+          \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+          \ 'filename': '%{expand(''%:p'')}',
+          \ 'line': '%l',
+          \ 'lineinfo': '%3l%-2v',
+          \ 'mode': '%{lightline#mode()}',
+          \ 'modified': '%( %#ModifiedColor#%{LightlineModified()} %)',
+          \ 'paste': '%{&paste?"PASTE":""}',
+          \ 'percent': '%3p%%',
+          \ 'percentwin': '%P',
+          \ 'readonly': '%R',
+          \ 'relativepath': '%f',
+          \ 'spell': '%{&spell?&spelllang:""}',
+          \ 'winnr': '%{winnr()}',
+          \ }
+    let g:lightline.component_expand = {
+          \ 'linter_checking': 'lightline#ale#checking',
+          \ 'linter_errors': 'lightline#ale#errors',
+          \ 'linter_ok': 'lightline#ale#ok',
+          \ 'linter_warnings': 'lightline#ale#warnings',
+          \ }
+    let g:lightline.component_type = {
+          \ 'modified': 'raw',
+          \ 'linter_checking': 'left',
+          \ 'linter_errors': 'error',
+          \ 'linter_ok': 'left',
+          \ 'linter_warnings': 'warning',
+          \ }
+    let g:lightline.component_function = {
+          \ 'gitbranch': 'gina#component#repo#branch',
+          \ }
+    let g:lightline.active = {
+          \ 'left': [ ['mode', 'paste'], ['filename', 'gitbranch'] ],
+          \ 'right': [ [ 'lineinfo', 'percent' ], [ 'filetype', 'fileformat', 'fileencoding' ], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
+          \ }
+    let g:lightline.inactive = {
+          \ 'left': [ [ 'filename' ] ],
+          \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ]
+          \ }
+    let g:lightline.tabline = {
+          \ 'left': [ [ 'tabs' ] ],
+          \ 'right': [ [ 'close' ] ]
+          \ }
+    let g:lightline.tab = {
+          \ 'active': [ 'tabnum', 'filename', 'modified' ],
+          \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
+          \ }
+    let g:lightline.enable = { 'statusline': 1, 'tabline': 1 }
+    let g:lightline.separator = { 'left': '', 'right': '' }
+    let g:lightline.subseparator = { 'left': ' ', 'right': ' ' }
+    let g:lightline#bufferline#shorten_path = 1
+    let g:lightline#bufferline#enable_devicons = 1
+
+    function! s:MaybeUpdateLightline()
+      if exists('#lightline')
+        call lightline#update()
+      end
+    endfunction
+    Gautocmd User ALELint call s:MaybeUpdateLightline()
 " }
 
 " nerdcommenter {
@@ -294,29 +394,37 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | execute "
 let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
 
-" VM
-let g:VM_maps = {}
-let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
-let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
-let g:VM_maps["Select l"]           = '<S-Right>'       " start selecting left
-let g:VM_maps["Select h"]           = '<S-Left>'        " start selecting right
+" VM {
+    let g:VM_maps = {}
+    let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+    let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
+    let g:VM_maps["Select l"]           = '<S-Right>'       " start selecting left
+    let g:VM_maps["Select h"]           = '<S-Left>'        " start selecting right
 
 
-let g:VM_clear_buffer_hl = 0
+    let g:VM_clear_buffer_hl = 0
 
-fun! VM_Start()
-  HighlightedyankOff
-endfun
+    fun! VM_Start()
+      HighlightedyankOff
+    endfun
 
-fun! VM_Exit()
-  HighlightedyankOn
-endfun
+    fun! VM_Exit()
+      HighlightedyankOn
+    endfun
+"}
 
-" indentLine
-let g:indentLine_setColors = 0
-let g:indentLine_char = '¦'
-let g:indentLine_first_char = '┆'
-let g:indentLine_showFirstIndentLevel = 1
+" VimAutoPep8 {
+    let g:autopep8_aggressive = 2
+    let g:autopep8_disable_show_diff = 1
+    let g:autopep8_max_line_length = 99
+"}
+
+" indentLine {
+    let g:indentLine_setColors = 0
+    let g:indentLine_char = '¦'
+    let g:indentLine_first_char = '┆'
+    let g:indentLine_showFirstIndentLevel = 1
+"}
 
 function! HandleURL()
   let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
@@ -332,3 +440,48 @@ endfunction
 
 nnoremap <leader>ou :call HandleURL()<CR>¬
 
+" ALE {
+    " Ale:
+let g:ale_cache_executable_check_failures = 1
+let g:ale_change_sign_column_color = 0
+let g:ale_completion_enabled = 0
+let g:ale_cursor_detail = 1
+let g:ale_echo_cursor = 1
+let g:ale_echo_delay = 20
+let g:ale_fix_on_save = 1
+let g:ale_keep_list_window_open = 0
+let g:ale_lint_delay = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_list_window_size = 10
+let g:ale_open_list = 0
+let g:ale_set_highlights = 0
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+let g:ale_sign_column_always = 1
+let g:ale_use_global_executables = 1
+let g:ale_virtualtext_cursor = 1
+let g:ale_virtualtext_delay = 20
+let g:ale_warn_about_trailing_blank_lines = 1
+let g:ale_warn_about_trailing_whitespace = 1
+"" linters
+let g:ale_linters = {}
+let g:ale_linters.go = []  " let g:ale_linters.go = ['gofmt', 'go vet', 'golint', 'goimports', 'golangci-lint']
+let g:ale_linters.markdown = ['textlint']
+let g:ale_linters.proto = ['protoc-gen-lint']  " ['prototool', 'protoc-gen-lint']
+let g:ale_linters.python = ['flake8', 'mypy', 'pylint', 'pyls']
+let g:ale_linters.sh = ['shellcheck', 'shfmt', 'sh-language-server', 'shell']
+let g:ale_linters.yaml = ['yamllint']
+let g:ale_linters.zsh = ['shell']  " ['shellcheck', 'shfmt', 'shell']
+"" fixers
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'markdown': [],
+      \ }
+"" Go:
+let g:ale_go_gofmt_options = '-s'
+let g:ale_go_govet_options = '-all'
+"}
