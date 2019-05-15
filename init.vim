@@ -150,25 +150,17 @@ command! PackStatus call PackInit() | call minpac#status()
 
 " deoplete {
     let g:deoplete#enable_at_startup = 1
-    function SetLSPShortcuts()
-      nnoremap <leader>gd :call LanguageClient#textDocument_definition()<CR>
-      nnoremap <leader>gr :call LanguageClient#textDocument_rename()<CR>
-      nnoremap <leader>gf :call LanguageClient#textDocument_formatting()<CR>
-      nnoremap <leader>gt :call LanguageClient#textDocument_typeDefinition()<CR>
-      nnoremap <leader>gx :call LanguageClient#textDocument_references()<CR>
-      nnoremap <leader>ga :call LanguageClient_workspace_applyEdit()<CR>
-      nnoremap <leader>gc :call LanguageClient#textDocument_completion()<CR>
-      nnoremap <leader>gh :call LanguageClient#textDocument_hover()<CR>
-      nnoremap <leader>gs :call LanguageClient_textDocument_documentSymbol()<CR>
-      nnoremap <leader>gm :call LanguageClient_contextMenu()<CR>
-    endfunction()
-
-    augroup LSP
-      autocmd!
-      autocmd FileType cpp,c,python,go call SetLSPShortcuts()
-    augroup END
 
     let g:deoplete#sources#go#gocode_binary = "$GOPATH/bin/gocode"
+
+
+    let g:AutoPairsMapCR=0
+    let g:deoplete#auto_complete_start_length = 1
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_smart_case = 1
+    imap <expr><TAB> pumvisible() ? "\<C-n>" : (neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
+    imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+    imap <expr><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>\<Plug>AutoPairsReturn"
 
 " }
 
@@ -177,6 +169,24 @@ command! PackStatus call PackInit() | call minpac#status()
 
     " Required for operations modifying multiple buffers like rename.
     set hidden
+
+    function SetLSPShortcuts()
+      nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+      nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+      nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+      nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+      nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+      nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+      nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+      nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+      nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+      nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+    endfunction()
+
+    augroup LSP
+      autocmd!
+      autocmd FileType cpp,c,python,go call SetLSPShortcuts()
+    augroup END
 
     let g:LanguageClient_serverCommands = {
         \ 'python': ['pyls'],
@@ -304,7 +314,9 @@ endfun
 
 " indentLine
 let g:indentLine_setColors = 0
-
+let g:indentLine_char = '¦'
+let g:indentLine_first_char = '┆'
+let g:indentLine_showFirstIndentLevel = 1
 
 function! HandleURL()
   let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
