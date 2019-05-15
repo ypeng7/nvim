@@ -15,6 +15,7 @@ function! PackInit() abort
                 \ 'do': 'sh install.sh',
                 \})
 
+    call minpac#add('sheerun/vim-polyglot')
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
     call minpac#add('vim-airline/vim-airline')
@@ -185,11 +186,12 @@ command! PackStatus call PackInit() | call minpac#status()
         \ 'objc': ['ccls'],
         \ }
 
-    nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+    nnoremap gc :call LanguageClient_contextMenu()<CR>
     " Or map each action separately
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
     nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
+    autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 " }
 
