@@ -108,15 +108,16 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 
 " Use `[c` and `]c` for navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>lp <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>ln <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gt <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> grn <Plug>(coc-rename)
+nmap <silent> <leader>ld <Plug>(coc-definition)
+nmap <silent> <leader>lt <Plug>(coc-type-definition)
+nmap <silent> <leader>li <Plug>(coc-implementation)
+nmap <silent> <leader>lf <Plug>(coc-references)
+
+nmap <silent> <leader>lr <Plug>(coc-rename)
 
 " Use K for show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -229,7 +230,7 @@ set completeopt+=preview
 filetype plugin indent on     " required!
 
 "Better display for messages
-set cmdheight=1
+set cmdheight=2
 set noshowmode
 set noruler
 set noshowcmd
