@@ -2,7 +2,11 @@ if &compatible
   set nocompatible
 endif
 
-let g:python3_host_prog='/usr/local/bin/python3'
+if has('mac')
+    let g:python3_host_prog='/usr/local/bin/python3'
+else
+    let g:python3_host_prog='/usr/bin/python3'
+endif
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -28,7 +32,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'iamcco/mathjax-support-for-mkdp'
 
 Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 
@@ -199,8 +203,11 @@ let g:lightline = {
       \ },
       \ }
 
-let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls']
-
+if has('mac')
+    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls']
+else
+    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls']
+endif
 
 " ------------------- Self Configuration -----------------------
 " Use <Leader> in global plugin.
