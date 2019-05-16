@@ -2,6 +2,8 @@ if &compatible
   set nocompatible
 endif
 
+let g:python3_host_prog='/usr/local/bin/python3'
+
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -31,6 +33,7 @@ Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 
 Plug 'sebdah/vim-delve'
+Plug 'Shougo/echodoc.vim'
 
 " Git operators：tpope 的经典插件，不解释
 Plug 'tpope/vim-fugitive'
@@ -42,10 +45,10 @@ Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 " 对齐：总是能治愈我的强迫症
 Plug 'junegunn/vim-easy-align'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi'
 
 " Plug 'morhetz/gruvbox'
-Plug 'ayu-theme/ayu-vim'
+Plug 'nightsense/cosmic_latte'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
 
@@ -183,7 +186,7 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
-let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:lightline = { 'colorscheme': 'ayu' }
 
 let g:lightline = {
       \ 'active': {
@@ -196,7 +199,7 @@ let g:lightline = {
       \ },
       \ }
 
-let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-word', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git']
+let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls']
 
 
 " ------------------- Self Configuration -----------------------
@@ -205,17 +208,22 @@ let g:mapleader = "\<Space>"
 " Use <LocalLeader> in filetype plugin.
 let g:maplocalleader = ','
 
+set encoding=utf-8
+set mouse=a
+set mousehide
 
+set number
+set relativenumber
 set colorcolumn=80
 
 set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
 set nobackup
 set noswapfile
 set signcolumn=yes
-set softtabstop=4
-set expandtab
-set shiftwidth=4
-set smarttab
 
 set hlsearch
 set incsearch
@@ -235,7 +243,7 @@ set noshowmode
 set noruler
 set noshowcmd
 
-set clipboard=unnamed,unnamedplus
+set clipboard+=unnamedplus
 set updatetime=300
 
 " Switching Buffers
@@ -279,18 +287,14 @@ if has('termguicolors')
 endif
 
 " Switch
-colorscheme ayu
+colorscheme cosmic_latte
 if strftime('%H') >= 7 && strftime('%H') < 16
-  " set background=light
-  let ayucolor="light"
+  set background=light
 else
-  " set background=dark
-  let ayucolor="dark"
+  set background=dark
 endif
 
 
-highlight link CocErrorSign GruvboxRed
-highlight Normal guibg=NONE ctermbg=None
 highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 
@@ -298,8 +302,6 @@ hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 
 hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
 
-"only for PaperColor and gruvbox Colorscheme if use another colorscheme you should comment this
-" hi EndOfBuffer ctermfg=234 ctermbg=NONE guifg=#1c1c1c guibg=NONE guisp=NONE cterm=NONE gui=NONE
 
 
 " 打开文件自动定位到最后编辑的位置
@@ -355,10 +357,14 @@ let g:header_field_author_email = 'yuepaang@gmail.com'
 map <leader>ah :AddHeader<CR>
 " }
 
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
+
+" VM
+let g:VM_maps = {}
+let g:VM_maps["Find Under"] = '<C-d>'
+let g:VM_maps["Find Subword Under"] = '<C-d>'
+let g:VM_maps["Select l"] = '<S-Right>'
+let g:VM_maps["Select h"] = '<S-Left>'
+let g:VM_clear_buffer_hl = 0
 
 " Markdown
 let g:mkdp_auto_start = 1
@@ -378,4 +384,7 @@ nnoremap <C-l> <C-w>l
 xnoremap <  <gv
 xnoremap >  >gv
 
-
+" echodoc
+set noshowmode
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'signature'
