@@ -34,6 +34,7 @@ function! PackInit() abort
     " call minpac#add('vim-airline/vim-airline')
     " call minpac#add('vim-airline/vim-airline-themes')
     call minpac#add('itchyny/lightline.vim')
+    call minpac#add('itchyny/lightline-powerful')
     call minpac#add('maximbaz/lightline-ale')
     call minpac#add('mgee/lightline-bufferline')
     call minpac#add('ryanoasis/vim-devicons')
@@ -182,7 +183,6 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
 
     let g:deoplete#sources#go#gocode_binary = "$GOPATH/bin/gocode"
 
-
     let g:AutoPairsMapCR=0
     let g:deoplete#auto_complete_start_length = 1
     let g:deoplete#enable_at_startup = 1
@@ -214,7 +214,7 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
 
     augroup LSP
       autocmd!
-      autocmd FileType cpp,c,python,go call SetLSPShortcuts()
+      autocmd FileType cpp,c,python,go,objc call SetLSPShortcuts()
     augroup END
 
     let g:LanguageClient_serverCommands = {
@@ -225,11 +225,11 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
         \ 'objc': ['ccls'],
         \ }
 
-    nnoremap gc :call LanguageClient_contextMenu()<CR>
+    nnoremap <silent> <leader>lc :call LanguageClient_contextMenu()<CR>
     " Or map each action separately
-    nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> gr :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
     autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 " }
@@ -250,45 +250,45 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
     endif
 
 
-    function! LightlineModified()
-      hi ModifiedColor ctermfg=167 guifg=#cf6a4c ctermbg=242 guibg=#666656 term=bold cterm=bold
-      return &modified ? '+' : &modifiable ? '' : '-'
-    endfunction
+    " function! LightlineModified()
+      " hi ModifiedColor ctermfg=167 guifg=#cf6a4c ctermbg=242 guibg=#666656 term=bold cterm=bold
+      " return &modified ? '+' : &modifiable ? '' : '-'
+    " endfunction
 
-    let g:lightline.component = {
-          \ 'absolutepath': '%F',
-          \ 'bufnum': '%n',
-          \ 'charvalue': '%b',
-          \ 'charvaluehex': '%B',
-          \ 'close': '%999X X ',
-          \ 'column': '%c',
-          \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-          \ 'filename': '%{expand(''%:p'')}',
-          \ 'line': '%l',
-          \ 'lineinfo': '%3l%-2v',
-          \ 'mode': '%{lightline#mode()}',
-          \ 'modified': '%( %#ModifiedColor#%{LightlineModified()} %)',
-          \ 'paste': '%{&paste?"PASTE":""}',
-          \ 'percent': '%3p%%',
-          \ 'percentwin': '%P',
-          \ 'readonly': '%R',
-          \ 'relativepath': '%f',
-          \ 'spell': '%{&spell?&spelllang:""}',
-          \ 'winnr': '%{winnr()}',
-          \ }
+    " let g:lightline.component = {
+          " \ 'absolutepath': '%F',
+          " \ 'bufnum': '%n',
+          " \ 'charvalue': '%b',
+          " \ 'charvaluehex': '%B',
+          " \ 'close': '%999X X ',
+          " \ 'column': '%c',
+          " \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
+          " \ 'filename': '%{expand(''%:p'')}',
+          " \ 'line': '%l',
+          " \ 'lineinfo': '%3l%-2v',
+          " \ 'mode': '%{lightline#mode()}',
+          " \ 'modified': '%( %#ModifiedColor#%{LightlineModified()} %)',
+          " \ 'paste': '%{&paste?"PASTE":""}',
+          " \ 'percent': '%3p%%',
+          " \ 'percentwin': '%P',
+          " \ 'readonly': '%R',
+          " \ 'relativepath': '%f',
+          " \ 'spell': '%{&spell?&spelllang:""}',
+          " \ 'winnr': '%{winnr()}',
+          " \ }
     let g:lightline.component_expand = {
           \ 'linter_checking': 'lightline#ale#checking',
           \ 'linter_errors': 'lightline#ale#errors',
           \ 'linter_ok': 'lightline#ale#ok',
           \ 'linter_warnings': 'lightline#ale#warnings',
           \ }
-    let g:lightline.component_type = {
-          \ 'modified': 'raw',
-          \ 'linter_checking': 'left',
-          \ 'linter_errors': 'error',
-          \ 'linter_ok': 'left',
-          \ 'linter_warnings': 'warning',
-          \ }
+    " let g:lightline.component_type = {
+          " \ 'modified': 'raw',
+          " \ 'linter_checking': 'left',
+          " \ 'linter_errors': 'error',
+          " \ 'linter_ok': 'left',
+          " \ 'linter_warnings': 'warning',
+          " \ }
     let g:lightline.component_function = {
           \ 'gitbranch': 'gina#component#repo#branch',
           \ }
@@ -296,18 +296,18 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
           \ 'left': [ ['mode', 'paste'], ['filename', 'gitbranch'] ],
           \ 'right': [ [ 'lineinfo', 'percent' ], [ 'filetype', 'fileformat', 'fileencoding' ], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
           \ }
-    let g:lightline.inactive = {
-          \ 'left': [ [ 'filename' ] ],
-          \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ]
-          \ }
+    " let g:lightline.inactive = {
+          " \ 'left': [ [ 'filename' ] ],
+          " \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ]
+          " \ }
     let g:lightline.tabline = {
           \ 'left': [ [ 'tabs' ] ],
           \ 'right': [ [ 'close' ] ]
           \ }
-    let g:lightline.tab = {
-          \ 'active': [ 'tabnum', 'filename', 'modified' ],
-          \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
-          \ }
+    " let g:lightline.tab = {
+          " \ 'active': [ 'tabnum', 'filename', 'modified' ],
+          " \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
+          " \ }
     let g:lightline.enable = { 'statusline': 1, 'tabline': 1 }
     let g:lightline.separator = { 'left': '', 'right': '' }
     let g:lightline.subseparator = { 'left': ' ', 'right': ' ' }
@@ -425,20 +425,6 @@ let g:strip_whitespace_on_save = 1
     let g:indentLine_first_char = '┆'
     let g:indentLine_showFirstIndentLevel = 1
 "}
-
-function! HandleURL()
-  let s:uri = matchstr(getline("."), '[a-z]*:\/\/[^ >,;()]*')
-  let s:uri = shellescape(s:uri, 1)
-  echom s:uri
-  if s:uri != ""
-    silent exec "!open '".s:uri."'"
-    :redraw!
-  else
-    echo "No URI found in line."
-  endif
-endfunction
-
-nnoremap <leader>ou :call HandleURL()<CR>¬
 
 " ALE {
     " Ale:
