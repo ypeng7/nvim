@@ -7,9 +7,7 @@ function! PackInit() abort
     call minpac#add('deoplete-plugins/deoplete-go', {'do': 'make'})
     call minpac#add('deoplete-plugins/deoplete-jedi')
 
-    call minpac#add('davidhalter/jedi-vim')
     call minpac#add('hynek/vim-python-pep8-indent')
-
     call minpac#add('ekalinin/Dockerfile.vim')
     call minpac#add('uarun/vim-protobuf')
 
@@ -31,13 +29,8 @@ function! PackInit() abort
     call minpac#add('sheerun/vim-polyglot')
     call minpac#add('cinuor/vim-header')
     call minpac#add('jiangmiao/auto-pairs')
-    " call minpac#add('vim-airline/vim-airline')
-    " call minpac#add('vim-airline/vim-airline-themes')
-    call minpac#add('itchyny/lightline.vim')
-    call minpac#add('itchyny/lightline-powerful')
-    call minpac#add('maximbaz/lightline-ale')
-    call minpac#add('mgee/lightline-bufferline')
-    call minpac#add('ryanoasis/vim-devicons')
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
 
     call minpac#add('Yggdroot/indentLine')
     call minpac#add('scrooloose/nerdcommenter')
@@ -46,7 +39,6 @@ function! PackInit() abort
     call minpac#add('Xuyuanp/nerdtree-git-plugin')
 
     call minpac#add('airblade/vim-gitgutter')
-    call minpac#add('lambdalisue/gina.vim')
 
     call minpac#add('junegunn/vim-easy-align')
     call minpac#add('iamcco/mathjax-support-for-mkdp')
@@ -56,7 +48,6 @@ function! PackInit() abort
     call minpac#add('heavenshell/vim-pydocstring')
     call minpac#add('mg979/vim-visual-multi')
 
-    call minpac#add('junegunn/seoul256.vim')
     call minpac#add('nightsense/cosmic_latte')
     call minpac#add('machakann/vim-highlightedyank')
     call minpac#add('ntpeters/vim-better-whitespace')
@@ -65,14 +56,6 @@ endfunction
 command! PackUpdate call PackInit() | call minpac#update('', {'do': 'call minpac#status()'})
 command! PackClean  call PackInit() | call minpac#clean()
 command! PackStatus call PackInit() | call minpac#status()
-
-" GlobalAutoCmd:
-
-augroup GlobalAutoCmd
-  autocmd!
-augroup END
-command! -nargs=* Gautocmd   autocmd GlobalAutoCmd <args>
-command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
 
 " neovim global settings{
 
@@ -87,12 +70,6 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
     filetype indent on
     filetype plugin on
     set magic
-
-    set foldenable
-    set foldmethod=syntax
-    set foldcolumn=0
-    setlocal foldlevel=1
-    set foldlevelstart=99
 
     set autowrite
     set autochdir
@@ -146,14 +123,13 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
     set number
     set relativenumber
     set laststatus=2
-    " set spell spelllang=en_us
     set autoread
 
     " Highlight end of line whitespace.
     highlight WhitespaceEOL ctermbg=red guibg=red
     match WhitespaceEOL /\s\+$/
 
-    set clipboard=unnamed,unnamedplus
+    set clipboard+=unnamedplus
     let mapleader = "\<SPACE>"
     let maplocalleader = ","
 
@@ -167,15 +143,12 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
     endif
 
 
-    " nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
     if has('unix')
         let g:python3_host_prog='/usr/bin/python3'
     else
         let g:python3_host_prog='/usr/local/bin/python3'
     endif
 
-    " hi Pmenu ctermfg=black ctermbg=gray  guibg=#444444
-    " hi PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 " }
 
 " deoplete {
@@ -225,11 +198,6 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
         \ 'objc': ['ccls'],
         \ }
 
-    nnoremap <silent> <leader>lc :call LanguageClient_contextMenu()<CR>
-    " Or map each action separately
-    nnoremap <silent> <leader>lh :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> <leader>ld :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <leader>lr :call LanguageClient#textDocument_rename()<CR>
     autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 " }
@@ -240,86 +208,44 @@ command! -nargs=* Gautocmdft autocmd GlobalAutoCmd FileType <args>
     let g:echodoc#type = 'signature'
 " }
 
-" lightline {
+" airline {
     " https://donniewest.com/a-guide-to-basic-neovim-plugins
     let g:lightline = {}
     if strftime('%H') >= 7 && strftime('%H') < 16
-        let g:lightline.colorscheme = 'cosmic_latte_light'
+        let g:airline_theme = 'cosmic_latte_light'
     else
-        let g:lightline.colorscheme = 'cosmic_latte_dark'
+        let g:airline_theme = 'cosmic_latte_dark'
     endif
 
+    let g:airline_inactive_collapse = 0
+    let g:airline_powerline_fonts = 1
+    let g:airline_exclude_preview = 1
+    let g:airline#extensions#tagbar#enabled = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#tabs_label = 'Tabs'
+    let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline#extensions#tabline#show_tab_nr = 0 " Disable tab numbers
+    let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+    let g:airline#extensions#quickfix#location_text = 'Location'
+    let g:airline#extensions#branch#sha1_len = 8
+    let g:airline#extensions#nrrwrgn#enabled = 1
+    let g:airline#extensions#ctrlspace#enabled = 1
+    let g:CtrlSpaceStatuslineFunction = "airline#extensions#ctrlspace#statusline()"
+    " sections X and C are swapped as C gets highlighted on file modification
+    let g:airline#extensions#default#layout = [
+    \   [ 'a', 'b', 'x' ],
+    \   [ 'c', 'warning', 'error', 'y', 'z' ]
+    \ ]
+    let g:airline#extensions#default#section_truncate_width = {
+    \   'b': 79,
+    \   'x': 60,
+    \   'y': 88,
+    \   'z': 45,
+    \   'warning': 80,
+    \   'error': 80,
+    \ }
 
-    " function! LightlineModified()
-      " hi ModifiedColor ctermfg=167 guifg=#cf6a4c ctermbg=242 guibg=#666656 term=bold cterm=bold
-      " return &modified ? '+' : &modifiable ? '' : '-'
-    " endfunction
 
-    " let g:lightline.component = {
-          " \ 'absolutepath': '%F',
-          " \ 'bufnum': '%n',
-          " \ 'charvalue': '%b',
-          " \ 'charvaluehex': '%B',
-          " \ 'close': '%999X X ',
-          " \ 'column': '%c',
-          " \ 'fileencoding': '%{&fenc!=#""?&fenc:&enc}',
-          " \ 'filename': '%{expand(''%:p'')}',
-          " \ 'line': '%l',
-          " \ 'lineinfo': '%3l%-2v',
-          " \ 'mode': '%{lightline#mode()}',
-          " \ 'modified': '%( %#ModifiedColor#%{LightlineModified()} %)',
-          " \ 'paste': '%{&paste?"PASTE":""}',
-          " \ 'percent': '%3p%%',
-          " \ 'percentwin': '%P',
-          " \ 'readonly': '%R',
-          " \ 'relativepath': '%f',
-          " \ 'spell': '%{&spell?&spelllang:""}',
-          " \ 'winnr': '%{winnr()}',
-          " \ }
-    let g:lightline.component_expand = {
-          \ 'linter_checking': 'lightline#ale#checking',
-          \ 'linter_errors': 'lightline#ale#errors',
-          \ 'linter_ok': 'lightline#ale#ok',
-          \ 'linter_warnings': 'lightline#ale#warnings',
-          \ }
-    " let g:lightline.component_type = {
-          " \ 'modified': 'raw',
-          " \ 'linter_checking': 'left',
-          " \ 'linter_errors': 'error',
-          " \ 'linter_ok': 'left',
-          " \ 'linter_warnings': 'warning',
-          " \ }
-    let g:lightline.component_function = {
-          \ 'gitbranch': 'gina#component#repo#branch',
-          \ }
-    let g:lightline.active = {
-          \ 'left': [ ['mode', 'paste'], ['filename', 'gitbranch'] ],
-          \ 'right': [ [ 'lineinfo', 'percent' ], [ 'filetype', 'fileformat', 'fileencoding' ], [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ] ]
-          \ }
-    " let g:lightline.inactive = {
-          " \ 'left': [ [ 'filename' ] ],
-          " \ 'right': [ [ 'lineinfo' ], [ 'percent' ] ]
-          " \ }
-    let g:lightline.tabline = {
-          \ 'left': [ [ 'tabs' ] ],
-          \ 'right': [ [ 'close' ] ]
-          \ }
-    " let g:lightline.tab = {
-          " \ 'active': [ 'tabnum', 'filename', 'modified' ],
-          " \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
-          " \ }
-    let g:lightline.enable = { 'statusline': 1, 'tabline': 1 }
-    let g:lightline.separator = { 'left': '', 'right': '' }
-    let g:lightline.subseparator = { 'left': ' ', 'right': ' ' }
-    let g:lightline#bufferline#shorten_path = 1
-    let g:lightline#bufferline#enable_devicons = 1
-
-    function! s:MaybeUpdateLightline()
-      if exists('#lightline')
-        call lightline#update()
-      end
-    endfunction
-    Gautocmd User ALELint call s:MaybeUpdateLightline()
 " }
 
 " nerdcommenter {
@@ -427,47 +353,51 @@ let g:strip_whitespace_on_save = 1
 "}
 
 " ALE {
-    " Ale:
-let g:ale_cache_executable_check_failures = 1
-let g:ale_change_sign_column_color = 0
-let g:ale_completion_enabled = 0
-let g:ale_cursor_detail = 1
-let g:ale_echo_cursor = 1
-let g:ale_echo_delay = 20
-let g:ale_fix_on_save = 1
-let g:ale_keep_list_window_open = 0
-let g:ale_lint_delay = 0
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_list_window_size = 10
-let g:ale_open_list = 0
-let g:ale_set_highlights = 0
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 0
-let g:ale_sign_column_always = 1
-let g:ale_use_global_executables = 1
-let g:ale_virtualtext_cursor = 1
-let g:ale_virtualtext_delay = 20
-let g:ale_warn_about_trailing_blank_lines = 1
-let g:ale_warn_about_trailing_whitespace = 1
-"" linters
-let g:ale_linters = {}
-let g:ale_linters.go = []  " let g:ale_linters.go = ['gofmt', 'go vet', 'golint', 'goimports', 'golangci-lint']
-let g:ale_linters.markdown = ['textlint']
-let g:ale_linters.proto = ['protoc-gen-lint']  " ['prototool', 'protoc-gen-lint']
-let g:ale_linters.python = ['flake8', 'mypy', 'pylint', 'pyls']
-let g:ale_linters.sh = ['shellcheck', 'shfmt', 'sh-language-server', 'shell']
-let g:ale_linters.yaml = ['yamllint']
-let g:ale_linters.zsh = ['shell']  " ['shellcheck', 'shfmt', 'shell']
-"" fixers
-let g:ale_fixers = {
-      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \ 'markdown': [],
-      \ }
-"" Go:
-let g:ale_go_gofmt_options = '-s'
-let g:ale_go_govet_options = '-all'
+    let g:ale_sign_error = "✗"
+    let g:ale_sign_warning = "⚠"
+    let g:ale_sign_info = "ℹ"
+    let g:ale_sign_style_error = "Ⓢ"
+    let g:ale_sign_style_warning = "⧌"
+    let g:ale_cache_executable_check_failures = 1
+    let g:ale_change_sign_column_color = 0
+    let g:ale_completion_enabled = 0
+    let g:ale_cursor_detail = 1
+    let g:ale_echo_cursor = 1
+    let g:ale_echo_delay = 20
+    let g:ale_fix_on_save = 1
+    let g:ale_keep_list_window_open = 0
+    let g:ale_lint_delay = 0
+    let g:ale_lint_on_enter = 1
+    let g:ale_lint_on_filetype_changed = 0
+    let g:ale_lint_on_insert_leave = 0
+    let g:ale_lint_on_save = 1
+    let g:ale_lint_on_text_changed = 'never'
+    let g:ale_list_window_size = 10
+    let g:ale_open_list = 0
+    let g:ale_set_highlights = 0
+    let g:ale_set_loclist = 0
+    let g:ale_set_quickfix = 0
+    let g:ale_sign_column_always = 1
+    let g:ale_use_global_executables = 1
+    let g:ale_virtualtext_cursor = 1
+    let g:ale_virtualtext_delay = 20
+    let g:ale_warn_about_trailing_blank_lines = 1
+    let g:ale_warn_about_trailing_whitespace = 1
+    "" linters
+    let g:ale_linters = {}
+    let g:ale_linters.go = []  " let g:ale_linters.go = ['gofmt', 'go vet', 'golint', 'goimports', 'golangci-lint']
+    let g:ale_linters.markdown = ['textlint']
+    let g:ale_linters.proto = ['protoc-gen-lint']  " ['prototool', 'protoc-gen-lint']
+    let g:ale_linters.python = ['flake8', 'mypy', 'pylint', 'pyls']
+    let g:ale_linters.sh = ['shellcheck', 'shfmt', 'sh-language-server', 'shell']
+    let g:ale_linters.yaml = ['yamllint']
+    let g:ale_linters.zsh = ['shell']  " ['shellcheck', 'shfmt', 'shell']
+    "" fixers
+    let g:ale_fixers = {
+          \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+          \ 'markdown': [],
+          \ }
+    "" Go:
+    let g:ale_go_gofmt_options = '-s'
+    let g:ale_go_govet_options = '-all'
 "}
