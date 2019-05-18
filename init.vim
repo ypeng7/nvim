@@ -190,7 +190,7 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
-let g:lightline = { 'colorscheme': 'ayu' }
+let g:lightline = { 'colorscheme': 'cosmic_latte_light' }
 
 let g:lightline = {
       \ 'active': {
@@ -374,7 +374,7 @@ let g:VM_maps["Select h"] = '<S-Left>'
 let g:VM_clear_buffer_hl = 0
 
 " Markdown
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 let g:mkdp_browser = ''
 nmap <F5> <Plug>MarkdownPreview
