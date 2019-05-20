@@ -115,19 +115,19 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 
 " Use `[c` and `]c` for navigate diagnostics
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next)
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
-nmap <silent> <leader>gd <Plug>(coc-definition)
-nmap <silent> <leader>gt <Plug>(coc-type-definition)
-nmap <silent> <leader>gi <Plug>(coc-implementation)
-nmap <silent> <leader>gf <Plug>(coc-references)
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gt <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gf <Plug>(coc-references)
 
-nmap <silent> <leader>gr <Plug>(coc-rename)
+nmap <silent> gr <Plug>(coc-rename)
 
 " Use K for show documentation in preview window
-nnoremap <silent> <leader>gm :call <SID>show_documentation()<CR>
+nnoremap <silent> gm :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if &filetype == 'vim'
