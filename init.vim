@@ -51,7 +51,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'mg979/vim-visual-multi'
 
-" Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'nightsense/cosmic_latte'
 Plug 'itchyny/lightline.vim'
 Plug 'w0rp/ale'
@@ -190,7 +190,7 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
-let g:lightline = { 'colorscheme': 'ayu' }
+let g:lightline = { 'colorscheme': 'gruvbox' }
 
 let g:lightline = {
       \ 'active': {
@@ -204,9 +204,9 @@ let g:lightline = {
       \ }
 
 if has('mac')
-    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls']
+    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls', 'coc-vimlsp']
 else
-    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls']
+    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls', 'coc-vimlsp']
 endif
 
 " ------------------- Self Configuration -----------------------
@@ -294,7 +294,9 @@ if has('termguicolors')
 endif
 
 " Switch
-colorscheme cosmic_latte
+" colorscheme cosmic_latte
+colorscheme gruvbox
+let g:gruvbox_italic = 1
 if strftime('%H') >= 7 && strftime('%H') < 16
   set background=light
 else
