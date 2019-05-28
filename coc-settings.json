@@ -26,27 +26,27 @@
 	"diagnostic.warningSign": "🤔",
     "diagnostic.refreshOnInsertMode": true,
     "languageserver": {
-    // "golang": {
-    //   "command": "gopls",
-    //   "args": [],
-    //   "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-    //   "filetypes": ["go"]
-    //   },
     "golang": {
-      "command": "go-langserver",
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "gocodeCompletionEnabled": true,
-        "diagnosticsEnabled": true,
-        "lintTool": "golint"
-      }
-    },
-    //"bash": {
-    //  "command": "bash-language-server",
-    //  "args": ["start"],
-    //  "filetypes": ["sh"],
-    //  "ignoredRootPaths": ["~"]
+      "command": "gopls",
+      "args": [],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+      },
+    //"golang": {
+    //  "command": "go-langserver",
+    //  "filetypes": ["go"],
+    //  "initializationOptions": {
+    //    "gocodeCompletionEnabled": true,
+    //    "diagnosticsEnabled": true,
+    //    "lintTool": "golint"
+    //  }
     //},
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
     "dockerfile": {
       "command": "docker-langserver",
       "filetypes": ["dockerfile"],
@@ -62,35 +62,7 @@
            "format": "json"
          }
        }
-    },
-    //"MPLS": {
-    //        "command": "dotnet",
-	//		"args": ["exec", "~/common/python-language-server/output/bin/Release/Microsoft.Python.LanguageServer.dll"],
-    //        "trace.server": "verbose",
-    //        "filetypes": ["python"],
-    //        "initializationOptions": {
-    //            "interpreter": {
-    //                "properties": {
-    //                    "InterpreterPath": "/usr/local/bin/python3",
-    //                    "UseDefaultDatabase": true
-    //                }
-    //            },
-    //            "displayOptions": {
-    //                "preferredFormat": "markdown",
-    //                "trimDocumentationLines": false,
-    //                "maxDocumentationLineLength": 0,
-    //                "trimDocumentationText": false,
-    //                "maxDocumentationTextLength": 0
-    //            },
-    //            "searchPaths": [
-    //                "/usr/local/bin"
-    //            ],
-    //            "testEnvironment": false,
-    //            "analysisUpdates": true,
-    //            "traceLogging": true,
-    //            "asyncStartup": true
-    //        }
-    //    }
+    }
     },
     "suggest.enablePreview": true,
     "suggest.maxPreviewWidth": 35,
