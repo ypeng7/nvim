@@ -261,7 +261,7 @@ set splitbelow
 set splitright
 
 set wildmenu
-set wildmenu=longest:full,full
+set wildmode=longest:full,full
 
 set clipboard+=unnamedplus
 set updatetime=300
