@@ -8,9 +8,6 @@ else
     let g:python3_host_prog='/usr/bin/python3'
 endif
 
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
 call plug#begin()
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -20,7 +17,6 @@ Plug 'Shougo/denite.nvim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'cinuor/vim-header'
 
@@ -36,18 +32,13 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
 Plug 'Shougo/neco-vim'
 Plug 'neoclide/coc-neco'
 
-Plug 'sebdah/vim-delve'
 Plug 'Shougo/echodoc.vim'
 
-" Git operators：tpope 的经典插件，不解释
 Plug 'tpope/vim-fugitive'
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-" 成对符号编辑：好多编辑器也支持了这个特性，因为太好用
 Plug 'tpope/vim-surround'
-" 自动闭合括号，这个必须有
 Plug 'jiangmiao/auto-pairs'
-" 对齐：总是能治愈我的强迫症
 Plug 'junegunn/vim-easy-align'
 Plug 'mg979/vim-visual-multi'
 
@@ -114,7 +105,6 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 
-" Use `[c` and `]c` for navigate diagnostics
 nmap <silent> gp <Plug>(coc-diagnostic-prev)
 nmap <silent> gn <Plug>(coc-diagnostic-next)
 
@@ -215,21 +205,38 @@ let g:mapleader = "\<Space>"
 " Use <LocalLeader> in filetype plugin.
 let g:maplocalleader = ','
 
+set ttyfast
+set ttimeout
+set backspace=indent,eol,start
+set matchpairs+=<:>
+
 set encoding=utf-8
 set mouse=a
 set mousehide
 
 set number
 set relativenumber
-set colorcolumn=80
+set colorcolumn=79
+set laststatus=2
+
+set hidden
+set history=1000
+set nocursorline
 
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
+set autoindent
+set smartindent
+set wrapscan
+set shiftround
+
+set autowrite
 set nobackup
 set noswapfile
+set nowritebackup
 set signcolumn=yes
 
 set hlsearch
@@ -250,16 +257,28 @@ set noshowmode
 set noruler
 set noshowcmd
 
+set splitbelow
+set splitright
+
+set wildmenu
+set wildmenu=longest:full,full
+
 set clipboard+=unnamedplus
 set updatetime=300
+
+set whichwrap+=h,l,<,>,[,],b,s,~
+if exists('+breakindent')
+    set breakindent
+    set wrap
+else
+    set nowrap
+endif
 
 " Switching Buffers
 noremap <leader>[ :bp<return>
 noremap <leader>] :bn<return>
 
-
 autocmd FileType json syntax match Comment +\/\/.\+$+
-
 
 " NerdTree
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -310,7 +329,6 @@ match WhitespaceEOL /\s\+$/
 hi Whitespace ctermfg=96 guifg=#725972 guibg=NONE ctermbg=NONE
 
 hi NeomakeVirtualtextError ctermfg=124 guifg=#af0000 guibg=NONE ctermbg=NONE
-
 
 
 " 打开文件自动定位到最后编辑的位置
