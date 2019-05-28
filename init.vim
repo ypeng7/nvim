@@ -27,6 +27,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
 Plug 'cinuor/vim-header'
 
+Plug 'sbdchd/neoformat'
 " Using a non-master branch
 " Language pack：一个包含了很多语言配置的包，有种 one thing to rule them all 的意思
 Plug 'sheerun/vim-polyglot'
@@ -51,7 +52,11 @@ Plug 'mg979/vim-visual-multi'
 
 Plug 'morhetz/gruvbox'
 Plug 'nightsense/cosmic_latte'
+
 Plug 'itchyny/lightline.vim'
+Plug 'mgee/lightline-bufferline'
+Plug 'ryanoasis/vim-devicons'
+
 Plug 'w0rp/ale'
 
 call plug#end()
@@ -190,15 +195,30 @@ endfunction
 let g:lightline = { 'colorscheme': 'gruvbox' }
 
 let g:lightline = {
+   	  \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' },
+	  \ 'tabline': {
+      \   'left': [['buffers']],
+      \   'right': [[ 'exit' ]],
+      \ },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'cocstatus', 'currentfunction', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ 'component_expand': {
+      \   'buffers': 'lightline#bufferline#buffers',
+      \ },
+            \ 'component_type': {
+      \   'buffers': 'tabsel'
       \ },
       \ }
+let g:lightline#bufferline#shorten_path = 1
+let g:lightline#bufferline#enable_devicons = 1
 
 if has('mac')
     let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls', 'coc-vimlsp']
@@ -422,3 +442,7 @@ xnoremap >  >gv
 set noshowmode
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'signature'
+
+" Neoformat
+" To Run Manually
+nnoremap <leader>fm :Neoformat<CR>
