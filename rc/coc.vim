@@ -106,3 +106,4 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
                                            \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>

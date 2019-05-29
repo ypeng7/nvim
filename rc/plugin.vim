@@ -18,8 +18,12 @@ Plug 'sbdchd/neoformat'
 " Language pack：一个包含了很多语言配置的包，有种 one thing to rule them all 的意思
 Plug 'sheerun/vim-polyglot'
 " Markdown 实时预览插件，很好用
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'iamcco/mathjax-support-for-mkdp'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+if executable('node') && executable('yarn')
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+else
+    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+endif
 
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
@@ -27,11 +31,12 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 Plug 'Shougo/echodoc.vim'
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'tpope/vim-surround'

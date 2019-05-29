@@ -37,7 +37,11 @@ let g:VM_clear_buffer_hl = 0
 " Markdown
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
 let g:mkdp_browser = ''
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
 nmap <F5> <Plug>MarkdownPreview
 nmap <F6> <Plug>MarkdownPreviewStop
 nmap <C-p> <Plug>MarkdownPreviewToggle

@@ -66,6 +66,7 @@ set updatetime=300
 
 set whichwrap+=h,l,<,>,[,],b,s,~
 if exists('+breakindent')
+    let &showbreak = '↳ '
     set breakindent
     set wrap
 else
