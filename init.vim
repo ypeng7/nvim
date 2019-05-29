@@ -54,3 +54,5 @@ let g:echodoc#type = 'signature'
 " Neoformat
 " To Run Manually
 nnoremap <leader>fm :Neoformat<CR>
+
+nmap <silent> <leader>pd <Plug>(pydocstring)

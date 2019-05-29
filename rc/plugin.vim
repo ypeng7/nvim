@@ -53,4 +53,6 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'w0rp/ale'
 
+Plug 'heavenshell/vim-pydocstring'
+
 call plug#end()
