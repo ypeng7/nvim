@@ -30,8 +30,7 @@ Plug 'SirVer/ultisnips'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'do': 'yarn install'}
-Plug 'neoclide/coc.nvim', { 'do': './install.sh nightly' }
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 Plug 'Shougo/echodoc.vim'
