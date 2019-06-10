@@ -6,9 +6,8 @@ let g:ale_fixers = {
 \}
 
 
-" \ 'python': ['flake8', 'mypy', 'pydocstyle', 'pylint'],
 let g:ale_linters = {
-              \ 'python': ['flake8'],
+              \ 'python': ['flake8', 'pydocstyle', 'mypy', 'autopep8'],
               \ 'sh': ['language_server'],
               \ 'go': ['gopls'],
               \ 'zsh': ['shell'],

@@ -6,7 +6,6 @@
     "python.linting.flake8Enabled": true,
     "python.autoComplete.addBrackets": true,
     "coc.preferences.formatOnType": true,
-    // "python.pythonPath": "/usr/local/bin/python3",
     "list.normalMappings": {
       "t": "action:tabe",
       "v": "action:vsplit",
@@ -32,15 +31,6 @@
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
       },
-    //"golang": {
-    //  "command": "go-langserver",
-    //  "filetypes": ["go"],
-    //  "initializationOptions": {
-    //    "gocodeCompletionEnabled": true,
-    //    "diagnosticsEnabled": true,
-    //    "lintTool": "golint"
-    //  }
-    //},
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
@@ -100,7 +90,5 @@
     "coc.source.dictionary.priority": 9,
     "coc.source.dictionary.filetypes": ["markdown", "text"],
     "coc.preferences.colorSupport": true,
-    //"coc.preferences.diagnostic.displayByAle": true,
-	//"highlight.disableLanguages": ["c", "cpp", "python", "go"],
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"]
 }
