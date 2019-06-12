@@ -7,8 +7,8 @@ endif
 
 call plug#begin()
 
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/denite.nvim'
+Plug 'elzr/vim-json'
+Plug 'mrk21/yaml-vim'
 
 Plug 'scrooloose/nerdcommenter'
 Plug 'cinuor/vim-header'
