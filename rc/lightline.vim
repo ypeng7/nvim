@@ -3,7 +3,7 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
-let g:lightline = { 'colorscheme': 'gruvbox' }
+let g:lightline = { 'colorscheme': 'seoul256' }
 
 let g:lightline = {
    	  \ 'separator': { 'left': '', 'right': '' },

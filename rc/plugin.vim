@@ -46,6 +46,7 @@ Plug 'mg979/vim-visual-multi'
 
 Plug 'morhetz/gruvbox'
 Plug 'nightsense/cosmic_latte'
+Plug 'junegunn/seoul256.vim'
 
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'

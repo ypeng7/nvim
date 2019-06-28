@@ -87,9 +87,9 @@ endif
 
 " Switch
 " colorscheme cosmic_latte
-colorscheme gruvbox
-let g:gruvbox_italic = 1
-if strftime('%H') >= 7 && strftime('%H') < 16
+colorscheme seoul256
+" let g:gruvbox_italic = 1
+if strftime('%H') >= 7 && strftime('%H') < 11
   set background=light
 else
   set background=dark
