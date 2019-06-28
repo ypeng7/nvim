@@ -3,6 +3,62 @@ let g:mapleader = "\<Space>"
 " Use <LocalLeader> in filetype plugin.
 let g:maplocalleader = ','
 
+set nobackup
+set cursorcolumn
+set encoding=utf8
+set fillchars=vert:│
+
+" Uses tpope's vim-sensible defaults
+set hidden
+set notimeout
+set noswapfile
+set nowritebackup
+set nowrap
+set nofoldenable
+set lazyredraw
+set number
+set expandtab
+set ignorecase
+set smartcase
+set noshowmode
+set modeline
+set nospell
+
+
+set nobackup
+set cursorcolumn
+set pyx=3
+
+let g:indent_guides_auto_colors = 0
+" Set split separator to Unicode box drawing character
+set encoding=utf8
+set fillchars=vert:│
+
+" Uses tpope's vim-sensible defaults
+set hidden
+set notimeout
+set noswapfile
+set nowritebackup
+set nowrap
+set nofoldenable
+set lazyredraw
+set number
+set expandtab
+set ignorecase
+set smartcase
+set noshowmode
+set modeline
+set nospell
+
+" Enable popup transparency (neovim >= 0.4)
+set pumblend=22
+set wildoptions=pum
+
+" Make it obvious where 80 characters is
+set textwidth=120
+set colorcolumn=+1
+let &colorcolumn = '80,' . join(range(120, 999), ',')
+
 set ttyfast
 set ttimeout
 set backspace=indent,eol,start
