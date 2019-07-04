@@ -165,15 +165,6 @@ for f in split(glob('~/.config/nvim/rc/ftplugin/*.vim'), '\n')
     exe 'source' f
 endfor
 
-" netrw
-let g:netrw_banner=0
-let g:netrw_winsize=20
-let g:netrw_liststyle=3
-let g:netrw_localrmdir='rm -r'
-
-nnoremap <leader>n :Lexplore<CR>
-
-
 " windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
