@@ -10,6 +10,7 @@ call plug#begin()
 Plug 'elzr/vim-json'
 Plug 'mrk21/yaml-vim'
 
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'cinuor/vim-header'
 

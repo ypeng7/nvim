@@ -174,3 +174,6 @@ nnoremap <C-l> <C-w>l
 " Don't lose selection when shifting sidewards
 xnoremap <  <gv
 xnoremap >  >gv
+
+" nerdtree
+nnoremap <silent> <leader>n :<C-u>NERDTreeToggle<CR>
