@@ -45,5 +45,5 @@
     let g:NERDTreeDirArrowCollapsible = "\u00a0"
     let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
 
-    au VimEnter *  NERDTree
+    " au VimEnter *  NERDTree
 " }
