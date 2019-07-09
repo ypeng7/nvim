@@ -1,9 +1,13 @@
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\   'json': ['prettier'],
-\   'python': ['autopep8'],
-\}
+    \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+    \   'javascript': ['eslint', 'prettier'],
+    \   'typescript': ['tslint', 'prettier'],
+    \   'json': ['prettier', 'fixjson'],
+    \   'python': ['autopep8'],
+    \   'rust': ['rustfmt'],
+    \   'c': ['clang-format'],
+    \   'cpp': ['clang-format'],
+    \}
 
 
 let g:ale_linters = {

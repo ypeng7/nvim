@@ -14,6 +14,9 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'cinuor/vim-header'
 
+Plug 'vim-scripts/IndexedSearch'
+Plug 'haya14busa/incsearch.vim'
+
 Plug 'sbdchd/neoformat'
 " Using a non-master branch
 " Language pack：一个包含了很多语言配置的包，有种 one thing to rule them all 的意思
@@ -32,6 +35,10 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'Shougo/neco-vim' | Plug 'neoclide/coc-neco'
+Plug 'Shougo/neoinclude.vim' | Plug 'jsfaint/coc-neoinclude'
+Plug 'tjdevries/coc-zsh'
+
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
 Plug 'Shougo/echodoc.vim'

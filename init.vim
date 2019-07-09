@@ -28,8 +28,8 @@ map <leader>ah :AddHeader<CR>
 
 " VM
 let g:VM_maps = {}
-let g:VM_maps["Find Under"] = '<C-d>'
-let g:VM_maps["Find Subword Under"] = '<C-d>'
+let g:VM_maps["Find Under"] = '<C-n>'
+let g:VM_maps["Find Subword Under"] = '<C-n>'
 let g:VM_maps["Select l"] = '<S-Right>'
 let g:VM_maps["Select h"] = '<S-Left>'
 let g:VM_clear_buffer_hl = 0

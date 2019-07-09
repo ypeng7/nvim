@@ -26,8 +26,8 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 
-nmap <silent> gp <Plug>(coc-diagnostic-prev)
-nmap <silent> gn <Plug>(coc-diagnostic-next)
+nmap <silent> dp <Plug>(coc-diagnostic-prev)
+nmap <silent> dn <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -96,9 +96,9 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 if has('mac')
-    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls', 'coc-vimlsp', 'coc-ultisnips', 'coc-neosnippet', 'coc-java']
+    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-imselect', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls', 'coc-vimlsp', 'coc-ultisnips', 'coc-neosnippet', 'coc-java', 'coc-lists', 'coc-highlight']
 else
-    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls', 'coc-vimlsp', 'coc-ultisnips', 'coc-neosnippet', 'coc-java']
+    let g:coc_global_extensions =['coc-snippets', 'coc-prettier', 'coc-pairs', 'coc-json', 'coc-python', 'coc-yank', 'coc-dictionary', 'coc-tsserver', 'coc-emmet', 'coc-git', 'coc-rls', 'coc-vimlsp', 'coc-ultisnips', 'coc-neosnippet', 'coc-java', 'coc-lists', 'coc-highlight']
 endif
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -107,3 +107,39 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
                                            \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
+
+
+function! CocHighlight() abort
+    if &filetype !=# 'markdown'
+        call CocActionAsync('highlight')
+    endif
+endfunction
+
+function! CocFloatingLockToggle() abort
+    if g:CocFloatingLock == 0
+        let g:CocFloatingLock = 1
+    elseif g:CocFloatingLock == 1
+        let g:CocFloatingLock = 0
+    endif
+endfunction
+
+function! CocHover() abort
+    if !coc#util#has_float() && g:CocHoverEnable == 1
+        call CocActionAsync('doHover')
+        call CocActionAsync('showSignatureHelp')
+    endif
+endfunction
+
+augroup CocAu
+    autocmd!
+    autocmd CursorHold * silent call CocHover()
+    autocmd CursorHold * silent call CocHighlight()
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+    autocmd InsertEnter * call coc#util#float_hide()
+    autocmd VimEnter * inoremap <expr> <Tab> (pumvisible() ? "\<C-n>" : "\<Tab>")
+augroup END
+let g:CocHoverEnable = 0
+
+highlight CocHighlightText cterm=bold gui=bold
+highlight CocErrorHighlight ctermfg=Gray guifg=#888888
+highlight CocCodeLens ctermfg=Gray guifg=#888888

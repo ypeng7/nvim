@@ -101,8 +101,8 @@ set smartcase
 
 set shortmess=aFc
 set completefunc=emoji#complete
-set completeopt=longest,menu
-set completeopt+=preview
+set completeopt=noinsert,noselect,menuone
+
 filetype plugin indent on     " required!
 
 "Better display for messages
@@ -177,3 +177,13 @@ xnoremap >  >gv
 
 " nerdtree
 nnoremap <silent> <leader>n :<C-u>NERDTreeToggle<CR>
+
+imap <C-j>     <Plug>(neosnippet_expand_or_jump)
+smap <C-j>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-j>     <Plug>(neosnippet_expand_target)
+
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
+
+let g:neosnippet#snippets_directory = expand('~/.config/nvim/plugged/vim-snippets/snippets')
