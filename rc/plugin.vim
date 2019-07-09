@@ -10,17 +10,26 @@ call plug#begin()
 Plug 'elzr/vim-json'
 Plug 'mrk21/yaml-vim'
 
+" NerdTree
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'low-ghost/nerdtree-fugitive'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ivalkeen/nerdtree-execute'
+
 Plug 'scrooloose/nerdcommenter'
 Plug 'cinuor/vim-header'
 
+" Search
 Plug 'vim-scripts/IndexedSearch'
 Plug 'haya14busa/incsearch.vim'
 
 Plug 'sbdchd/neoformat'
+
 " Using a non-master branch
 " Language pack：一个包含了很多语言配置的包，有种 one thing to rule them all 的意思
 Plug 'sheerun/vim-polyglot'
+
 " Markdown 实时预览插件，很好用
 " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 if executable('node') && executable('yarn')
@@ -34,6 +43,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'fszymanski/fzf-quickfix'
 
+" snippets
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'Shougo/neosnippet.vim'
@@ -63,7 +73,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'
 Plug 'ryanoasis/vim-devicons'
-  Plug 'maximbaz/lightline-ale'
+Plug 'maximbaz/lightline-ale'
 
 Plug 'w0rp/ale'
 

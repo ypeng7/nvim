@@ -91,7 +91,8 @@ set autowrite
 set nobackup
 set noswapfile
 set nowritebackup
-set signcolumn=yes
+" set signcolumn=yes
+set signcolumn=no
 
 set hlsearch
 set incsearch
@@ -175,9 +176,6 @@ nnoremap <C-l> <C-w>l
 xnoremap <  <gv
 xnoremap >  >gv
 
-" nerdtree
-nnoremap <silent> <leader>n :<C-u>NERDTreeToggle<CR>
-
 imap <C-j>     <Plug>(neosnippet_expand_or_jump)
 smap <C-j>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-j>     <Plug>(neosnippet_expand_target)
@@ -187,3 +185,6 @@ if has('conceal')
 endif
 
 let g:neosnippet#snippets_directory = expand('~/.config/nvim/plugged/vim-snippets/snippets')
+
+" Clear current-search highlighting by hitting <CR> in normal mode.
+nnoremap <silent> <CR> :nohlsearch<CR><CR>
