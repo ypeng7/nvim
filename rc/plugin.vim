@@ -29,6 +29,11 @@ else
     Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 endif
 
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'fszymanski/fzf-quickfix'
+
 Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'Shougo/neosnippet.vim'
@@ -46,7 +51,6 @@ Plug 'Shougo/echodoc.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
@@ -59,6 +63,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'
 Plug 'ryanoasis/vim-devicons'
+  Plug 'maximbaz/lightline-ale'
 
 Plug 'w0rp/ale'
 
