@@ -146,7 +146,7 @@ endif
 " colorscheme cosmic_latte
 colorscheme seoul256
 " let g:gruvbox_italic = 1
-if strftime('%H') >= 7 && strftime('%H') < 11
+if strftime('%H') >= 7 && strftime('%H') < 10
   set background=light
 else
   set background=dark
